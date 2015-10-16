@@ -46,11 +46,16 @@ const pagination = combineReducers({
   })
 });
 
+// function loggedUser() {
+//   return null;
+// }
+
 const rootReducer = combineReducers({
   entities,
   pagination,
   errorMessage,
   router
+  // loggedUser
 });
 
 export default rootReducer;

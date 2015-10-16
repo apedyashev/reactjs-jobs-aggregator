@@ -1,6 +1,7 @@
 import 'isomorphic-fetch';
 import { Schema, arrayOf, normalize } from 'normalizr';
 import { camelizeKeys } from 'humps';
+import { pushState } from 'redux-router';
 
 const API_ROOT = 'http://ja.rrs-lab.com/api/';
 
@@ -14,7 +15,7 @@ function callJaApi(endpoint, schema) {
       response.json().then(json => ({ json, response }))
     ).then(({ json, response }) => {
       if (!response.ok) {
-        return Promise.reject(json);
+        return Promise.reject({json, statusCode: response.status});
       }
 
       const camelizedJson = camelizeKeys(json);
@@ -51,6 +52,7 @@ export const JA_CALL_API = Symbol('JA Call API');
 // A Redux middleware that interprets actions with CALL_API info specified.
 // Performs the call and promises when such actions are dispatched.
 export default store => next => action => {
+  console.log('========================== store', store.getState().router);
   const callJaApiSymbol = action[JA_CALL_API];
   if (typeof callJaApiSymbol === 'undefined') {
     return next(action);
@@ -88,17 +90,20 @@ export default store => next => action => {
   next(actionWith({ type: requestType }));
 
   return callJaApi(endpoint, schema).then(
-    function(response) {
-        console.log('response', response);
-        next(actionWith({response: response, type: successType}));
-    },
-    // response => next(actionWith({
-    //   response,
-    //   type: successType
-    // })),
-    error => next(actionWith({
-      type: failureType,
-      error: error.message || 'Something bad happened'
-    }))
+    response => next(actionWith({
+      response,
+      type: successType
+    })),
+    (data) => {
+      if (data.statusCode == 401) {
+        next(pushState(null, `/login`));
+      }
+      else {
+        next(actionWith({
+          type: failureType,
+          error: data.json.message || 'Something bad happened'
+        }))
+      }
+    }
   );
 };

@@ -6,6 +6,7 @@ import { loadJobs } from '../actions/ja';
 import JobItem from '../components/JobsPage/JobItem';
 import JobsSidebar from '../modules/JobsPageSidebar/components/Sidebar';
 import List from '../components/List';
+import { pushState } from 'redux-router';
 
 function loadData(props) {
   // const { fullName } = props;
@@ -86,5 +87,6 @@ function select(state) {
 // https://github.com/rackt/react-redux
 // export default connect(select)(JobsPage);
 export default connect(select, {
-  loadJobs
+  loadJobs,
+  pushState
 })(JobsPage);

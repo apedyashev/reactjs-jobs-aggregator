@@ -12,6 +12,8 @@ export default (
             component={JobsPage} />
     <Route path="stats"
             component={StatsPage} />
+    <Route path="stats"
+            component={StatsPage} />        
     <Route path="/:login/:name"
            component={RepoPage} />
     <Route path="/:login"

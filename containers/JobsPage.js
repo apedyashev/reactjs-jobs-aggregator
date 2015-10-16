@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { loadJobs } from '../actions/ja';
 // import { loadRepo, loadStargazers } from '../actions';
 // import Repo from '../components/Repo';
-// import User from '../components/User';
-// import List from '../components/List';
+import JobItem from '../components/JobItem';
+import List from '../components/List';
 
 function loadData(props) {
   // const { fullName } = props;
@@ -30,27 +30,34 @@ class JobsPage extends Component {
     }
   }
 
-  // handleLoadMoreClick() {
-  //   this.props.loadStargazers(this.props.fullName, true);
-  // }
+  handleLoadMoreClick() {
+    // this.props.loadStargazers(this.props.fullName, true);
+  }
 
   renderJob(job) {
     return (
-      <div key={job.id}> {job.title}</div>
-    );
+        <JobItem job={job}
+                 key={job.id}>
+        </JobItem>
+      );
+    // return (
+    //   <div key={job.id}> 
+    //   <a href={job.link} target="_blank">{job.title}</a> at {job.company}
+    //   </div>
+    // );
   }
 
   render() {
     const {jobs} = this.props;
     console.debug('jobs', jobs);
-    let jobsArray = [];
-    for(let id in jobs) {
-      jobsArray.push(jobs[id]);
-    }
     return (
       <div>
         <h3>Jobs</h3>
-        {jobsArray.map(this.renderJob)}
+         <List renderItem={this.renderJob}
+              items={jobs}
+              onLoadMoreClick={this.handleLoadMoreClick}
+              loadingLabel={`Loading jobs...`}
+              />
       </div>
       );
   }

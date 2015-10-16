@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 import { loadJobs } from '../actions/ja';
 // import { loadRepo, loadStargazers } from '../actions';
 // import Repo from '../components/Repo';
-import JobItem from '../components/JobItem';
+import JobItem from '../components/JobsPage/JobItem';
+import JobsSidebar from '../modules/JobsPageSidebar/components/Sidebar';
 import List from '../components/List';
 
 function loadData(props) {
   // const { fullName } = props;
-  console.log('-------------------------------------------');
   props.loadJobs();
 }
 
@@ -40,11 +40,6 @@ class JobsPage extends Component {
                  key={job.id}>
         </JobItem>
       );
-    // return (
-    //   <div key={job.id}> 
-    //   <a href={job.link} target="_blank">{job.title}</a> at {job.company}
-    //   </div>
-    // );
   }
 
   render() {
@@ -52,12 +47,17 @@ class JobsPage extends Component {
     console.debug('jobs', jobs);
     return (
       <div>
-        <h3>Jobs</h3>
-         <List renderItem={this.renderJob}
-              items={jobs}
-              onLoadMoreClick={this.handleLoadMoreClick}
-              loadingLabel={`Loading jobs...`}
-              />
+        <div style={{float:'left', width: '20%'}}>
+          <JobsSidebar />
+        </div>
+        <div style={{float:'left', width: '80%'}}>
+          <h3>Jobs</h3>
+          <List renderItem={this.renderJob}
+                items={jobs}
+                onLoadMoreClick={this.handleLoadMoreClick}
+                loadingLabel={`Loading jobs...`}
+                />
+        </div>
       </div>
       );
   }
@@ -76,7 +76,7 @@ JobsPage.propTypes = {
 
 function select(state) {
   console.log('state.entities.jobs', state);
-  const jobs = state.entities.jobs || []; //[{_id: 'sds', title: 'job 1'}];
+  const jobs = state.entities.jobs || []; 
   return {
      jobs
   };

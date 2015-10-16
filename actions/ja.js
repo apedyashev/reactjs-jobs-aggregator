@@ -14,7 +14,6 @@ function fetchJobs() {
   };
 }
 export function loadJobs(){
-  console.log('########loadJobs');
   return (dispatch, getState) => {
     return dispatch(fetchJobs());
   };

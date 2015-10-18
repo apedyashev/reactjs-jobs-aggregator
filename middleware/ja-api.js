@@ -4,6 +4,7 @@ import { camelizeKeys } from 'humps';
 import { pushState } from 'redux-router';
 
 const API_ROOT = 'http://ja.rrs-lab.com/api/';
+const HTTP_STATUS_NOT_AUTHORIZED = 401;
 
 // Fetches an API response and normalizes the result JSON according to schema.
 // This makes every API response have the same shape, regardless of how nested it was.
@@ -52,7 +53,6 @@ export const JA_CALL_API = Symbol('JA Call API');
 // A Redux middleware that interprets actions with CALL_API info specified.
 // Performs the call and promises when such actions are dispatched.
 export default store => next => action => {
-  console.log('========================== store', store.getState().router);
   const callJaApiSymbol = action[JA_CALL_API];
   if (typeof callJaApiSymbol === 'undefined') {
     return next(action);
@@ -80,9 +80,7 @@ export default store => next => action => {
 
   function actionWith(data) {
     const finalAction = Object.assign({}, action, data);
-    console.debug('finalAction',  action, data);
     delete finalAction[JA_CALL_API];
-    console.debug('finalAction', finalAction);
     return finalAction;
   }
 
@@ -95,7 +93,7 @@ export default store => next => action => {
       type: successType
     })),
     (data) => {
-      if (data.statusCode == 401) {
+      if (data.statusCode == HTTP_STATUS_NOT_AUTHORIZED) {
         next(pushState(null, `/login`));
       }
       else {

@@ -5,6 +5,7 @@ import UserPage from './containers/UserPage';
 import RepoPage from './containers/RepoPage';
 import JobsPage from './containers/JobsPage';
 import StatsPage from './containers/StatsPage';
+import LoginPage from './modules/LoginPage';
 
 export default (
   <Route path="/" component={App}>
@@ -12,8 +13,8 @@ export default (
             component={JobsPage} />
     <Route path="stats"
             component={StatsPage} />
-    <Route path="stats"
-            component={StatsPage} />        
+    <Route path="login"
+            component={LoginPage} />        
     <Route path="/:login/:name"
            component={RepoPage} />
     <Route path="/:login"

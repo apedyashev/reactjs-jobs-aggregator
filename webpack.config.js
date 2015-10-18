@@ -1,5 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
+var nodeModulesPath = path.resolve(__dirname, 'node_modules');
 
 module.exports = {
   devtool: 'cheap-module-eval-source-map',
@@ -7,6 +8,9 @@ module.exports = {
     'webpack-hot-middleware/client',
     './index'
   ],
+   resolve: {
+    extensions: ["", ".js", ".jsx"]
+  },
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
@@ -23,6 +27,11 @@ module.exports = {
       loaders: ['babel'],
       exclude: /node_modules/,
       include: __dirname
+    },
+    { 
+      test: /\.jsx?$/, 
+      loader: 'babel', 
+      include: /material-ui/ 
     }]
   }
 };

@@ -4,6 +4,7 @@ import { pushState } from 'redux-router';
 import { Link } from 'react-router';
 import Explore from '../components/Explore';
 import { resetErrorMessage } from '../actions';
+import '../modules/Core/less/style';
 
 class App extends Component {
   constructor(props) {
@@ -55,7 +56,9 @@ class App extends Component {
                  onChange={this.handleChange} />
         <hr />
         {this.renderErrorMessage()}
-        {children}
+        <div className="container">
+          {children}
+        </div>
       </div>
     );
   }

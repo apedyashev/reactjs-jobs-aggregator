@@ -2,15 +2,12 @@ import 'isomorphic-fetch';
 import { Schema, arrayOf, normalize } from 'normalizr';
 import { camelizeKeys } from 'humps';
 import { pushState } from 'redux-router';
+import {Zepto} from 'zepto-browserify';
 
 const API_ROOT = 'http://ja.rrs-lab.com/api/';
 const HTTP_STATUS_NOT_AUTHORIZED = 401;
 
-// Fetches an API response and normalizes the result JSON according to schema.
-// This makes every API response have the same shape, regardless of how nested it was.
-function callJaApi(endpoint, schema) {
-  const fullUrl = (endpoint.indexOf(API_ROOT) === -1) ? API_ROOT + endpoint : endpoint;
-
+function apiGet(endpoint) {
   return fetch(fullUrl)
     .then(response =>
       response.json().then(json => ({ json, response }))
@@ -26,6 +23,38 @@ function callJaApi(endpoint, schema) {
         }
       });
     });
+}
+
+function apiPost(endpoint) {
+  return new Promise(function(resolve, reject) {
+    Zepto.ajax({
+      url: endpoint,
+      data: {},
+      dataType: json,
+      type: 'post',
+      success: function(response) {
+        resolve(response);
+      },
+      error: function(xhr, errorType, error) {
+        console.log(xhr, errorType, error);
+        reject(errorType);
+      }
+    });
+  });
+}
+
+// Fetches an API response and normalizes the result JSON according to schema.
+// This makes every API response have the same shape, regardless of how nested it was.
+function callJaApi(endpoint, method = 'GET') {
+  const fullUrl = (endpoint.indexOf(API_ROOT) === -1) ? API_ROOT + endpoint : endpoint;
+
+  switch(method.toUpperCase()) {
+    case 'GET':
+      return apiGet(endpoint);
+    case 'POST':
+      return apiPost(endpoint);
+  }
+  
 }
 
 // We use this Normalizr schemas to transform API responses from a nested form
@@ -87,7 +116,7 @@ export default store => next => action => {
   const [requestType, successType, failureType] = types;
   next(actionWith({ type: requestType }));
 
-  return callJaApi(endpoint, schema).then(
+  return callJaApi(endpoint, 'GET').then(
     response => next(actionWith({
       response,
       type: successType

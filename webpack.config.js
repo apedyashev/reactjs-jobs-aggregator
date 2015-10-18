@@ -9,7 +9,7 @@ module.exports = {
     './index'
   ],
    resolve: {
-    extensions: ["", ".js", ".jsx"]
+    extensions: ["", ".js", ".jsx", '.less']
   },
   output: {
     path: path.join(__dirname, 'dist'),
@@ -23,16 +23,22 @@ module.exports = {
   ],
   module: {
     loaders: [{
-      test: /\.js$/,
-      loaders: ['babel'],
-      exclude: /node_modules/,
-      include: __dirname
-    },
-    { 
-      test: /\.jsx?$/, 
-      loader: 'babel', 
-      include: /material-ui/ 
-    }]
+        test: /\.js$/,
+        loaders: ['babel'],
+        exclude: /node_modules/,
+        include: __dirname
+      },
+      { 
+        test: /\.jsx?$/, 
+        loader: 'babel', 
+        include: /material-ui/ 
+      },
+      {
+        test: /\.less$/,
+        loaders: ['style', 'css', 'less'],
+        include: /less/ 
+      }
+    ]
   }
 };
 

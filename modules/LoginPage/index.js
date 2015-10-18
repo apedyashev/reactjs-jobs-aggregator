@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-const RaisedButton = require('material-ui/src/raised-button');
+import RaisedButton from 'material-ui/src/raised-button';
+import TextField from 'material-ui/src/text-field';
+import './less/style';
 
 function loadData() {}
 
@@ -23,16 +25,26 @@ class LoginPage extends Component {
 
   render() {
     return (
-      <div>
-        Login
-        <div>
-          <input type="text" placeholder="Email"/>
+      <form className="form-login">
+        <div className="row">
+          <div className="col-xs-12 text-center">
+            <h3>Login</h3>
+          </div>
+          <div className="col-xs-12">
+            <TextField
+              hintText="Please, enter your email"
+              floatingLabelText="Email" />
+          </div>
+          <div className="col-xs-12">
+            <TextField
+              hintText="Please, enter your password"
+              floatingLabelText="Password" />
+          </div>
+          <div className="col-xs-12 text-center">
+            <RaisedButton label="Submit" />
+          </div>
         </div>
-        <div>
-          <input type="password" placeholder="Password"/>
-        </div>
-        <RaisedButton label="Default" />
-      </div>
+      </form>
       );
   }
 }

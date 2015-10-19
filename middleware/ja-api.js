@@ -2,14 +2,29 @@ import 'isomorphic-fetch';
 import { Schema, arrayOf, normalize } from 'normalizr';
 import { camelizeKeys } from 'humps';
 import { pushState } from 'redux-router';
-import {Zepto} from 'zepto-browserify';
-
+import {$} from 'zepto-browserify';
+// window.$ = $;
 const API_ROOT = 'http://ja.rrs-lab.com/api/';
 const HTTP_STATUS_NOT_AUTHORIZED = 401;
 
-function apiGet(endpoint) {
-  return fetch(fullUrl)
-    .then(response =>
+// Fetches an API response and normalizes the result JSON according to schema.
+// This makes every API response have the same shape, regardless of how nested it was.
+function callJaApi(endpoint, jsonRoot, method = 'GET', data) {
+  const fullUrl = (endpoint.indexOf(API_ROOT) === -1) ? API_ROOT + endpoint : endpoint;
+
+  let fetchOptions = {
+    credentials: 'include'
+  };
+  if (method.toUpperCase() != 'GET') {
+    fetchOptions.method = method;
+  }
+  if (data && Object.keys(data).length) {
+    fetchOptions.body = $.param(data);
+    fetchOptions.headers = {
+      'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'
+    };
+  }
+  return fetch(fullUrl, fetchOptions).then(response =>
       response.json().then(json => ({ json, response }))
     ).then(({ json, response }) => {
       if (!response.ok) {
@@ -17,62 +32,17 @@ function apiGet(endpoint) {
       }
 
       const camelizedJson = camelizeKeys(json);
-      return Promise.resolve({
-        entities:{
-          jobs: camelizedJson
-        }
-      });
-    });
-}
-
-function apiPost(endpoint) {
-  return new Promise(function(resolve, reject) {
-    Zepto.ajax({
-      url: endpoint,
-      data: {},
-      dataType: json,
-      type: 'post',
-      success: function(response) {
-        resolve(response);
-      },
-      error: function(xhr, errorType, error) {
-        console.log(xhr, errorType, error);
-        reject(errorType);
+      let transformedResponse = {};
+      if (jsonRoot) {
+        transformedResponse[jsonRoot] = camelizedJson;
       }
+      else {
+        transformedResponse = camelizedJson;
+      }
+      return Promise.resolve({json: transformedResponse});
     });
-  });
 }
 
-// Fetches an API response and normalizes the result JSON according to schema.
-// This makes every API response have the same shape, regardless of how nested it was.
-function callJaApi(endpoint, method = 'GET') {
-  const fullUrl = (endpoint.indexOf(API_ROOT) === -1) ? API_ROOT + endpoint : endpoint;
-
-  switch(method.toUpperCase()) {
-    case 'GET':
-      return apiGet(endpoint);
-    case 'POST':
-      return apiPost(endpoint);
-  }
-  
-}
-
-// We use this Normalizr schemas to transform API responses from a nested form
-// to a flat form where repos and users are placed in `entities`, and nested
-// JSON objects are replaced with their IDs. This is very convenient for
-// consumption by reducers, because we can easily build a normalized tree
-// and keep it updated as we fetch more data.
-
-// Read more about Normalizr: https://github.com/gaearon/normalizr
-
-const jobSchema = new Schema('jobs', {
-  idAttribute: 'id'
-});
-
-export const JaSchemas = {
-  JOB: jobSchema,
-  JOB_ARRAY: arrayOf(jobSchema)
-};
 
 // Action key that carries API call info interpreted by this Redux middleware.
 // ES6 Symbol https://github.com/lukehoban/es6features#symbols
@@ -88,7 +58,7 @@ export default store => next => action => {
   }
 
   let { endpoint } = callJaApiSymbol;
-  const { schema, types } = callJaApiSymbol;
+  const { requestMethod, types, requestData, jsonRoot } = callJaApiSymbol;
 
   if (typeof endpoint === 'function') {
     endpoint = endpoint(store.getState());
@@ -97,9 +67,7 @@ export default store => next => action => {
   if (typeof endpoint !== 'string') {
     throw new Error('Specify a string endpoint URL.');
   }
-  // if (!schema) {
-  //   throw new Error('Specify one of the exported Schemas.');
-  // }
+  
   if (!Array.isArray(types) || types.length !== 3) {
     throw new Error('Expected an array of three action types.');
   }
@@ -116,12 +84,13 @@ export default store => next => action => {
   const [requestType, successType, failureType] = types;
   next(actionWith({ type: requestType }));
 
-  return callJaApi(endpoint, 'GET').then(
+  return callJaApi(endpoint, jsonRoot, requestMethod || 'GET', requestData).then(
     response => next(actionWith({
       response,
       type: successType
     })),
     (data) => {
+      console.debug(data.statusCode);
       if (data.statusCode == HTTP_STATUS_NOT_AUTHORIZED) {
         next(pushState(null, `/login`));
       }

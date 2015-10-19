@@ -9,11 +9,11 @@ function fetchSubscriptions() {
     [JA_CALL_API]: {
       types: [SUBSCRIPTION_REQUEST, SUBSCRIPTION_SUCCESS, SUBSCRIPTION_FAILURE],
       endpoint: `subscriptions`,
+      jsonRoot: 'sunscriptions'
     }
   };
 }
 export function loadSubscriptions(){
-  console.log('########loadSubscriptions');
   return (dispatch, getState) => {
     return dispatch(fetchSubscriptions());
   };

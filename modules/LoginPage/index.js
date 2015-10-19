@@ -1,26 +1,20 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { submitLoginForm } from './actions';
 import RaisedButton from 'material-ui/src/raised-button';
 import TextField from 'material-ui/src/text-field';
 import './less/style';
 
-function loadData() {}
-
 class LoginPage extends Component {
-
-  componentWillMount() {
-    loadData(this.props);
+  constructor(props) {
+    super(props);
+    this.submitForm = this.submitForm.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (!this.loaded) {
-      this.loaded = true;
-      loadData(nextProps);
-    }
-  }
-
-  handleLoadMoreClick() {
-    // this.props.loadStargazers(this.props.fullName, true);
+  submitForm() {
+    const email = this.refs['email'].getValue(),
+          password = this.refs['password'].getValue();
+    this.props.submitLoginForm(email, password);
   }
 
   render() {
@@ -33,15 +27,17 @@ class LoginPage extends Component {
           <div className="col-xs-12">
             <TextField
               hintText="Please, enter your email"
-              floatingLabelText="Email" />
+              floatingLabelText="Email" 
+              ref="email"/>
           </div>
           <div className="col-xs-12">
             <TextField
               hintText="Please, enter your password"
-              floatingLabelText="Password" />
+              floatingLabelText="Password" 
+              ref="password"/>
           </div>
           <div className="col-xs-12 text-center">
-            <RaisedButton label="Submit" />
+            <RaisedButton label="Submit" onClick={this.submitForm}/>
           </div>
         </div>
       </form>
@@ -56,5 +52,5 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, {
-  // loadJobs,
+  submitLoginForm
 })(LoginPage);

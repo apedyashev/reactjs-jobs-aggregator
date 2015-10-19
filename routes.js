@@ -1,11 +1,12 @@
 import React from 'react';
 import { Route } from 'react-router';
-import App from './containers/App';
-import UserPage from './containers/UserPage';
-import RepoPage from './containers/RepoPage';
-import JobsPage from './containers/JobsPage';
-import StatsPage from './containers/StatsPage';
-import LoginPage from './modules/LoginPage';
+import App from './modules/Core/App';
+//import UserPage from './containers/UserPage';
+//import RepoPage from './containers/RepoPage';
+
+import StatsPage    from './modules/StatsPage/StatsPage';
+import JobsPage     from './modules/JobsPage';
+import LoginPage    from './modules/LoginPage';
 
 export default (
   <Route path="/" component={App}>
@@ -15,9 +16,10 @@ export default (
             component={StatsPage} />
     <Route path="login"
             component={LoginPage} />        
-    <Route path="/:login/:name"
-           component={RepoPage} />
-    <Route path="/:login"
-           component={UserPage} />
   </Route>
 );
+
+//<Route path="/:login/:name"
+//       component={RepoPage} />
+//<Route path="/:login"
+//       component={UserPage} />

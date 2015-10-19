@@ -2,15 +2,17 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { pushState } from 'redux-router';
 import { Link } from 'react-router';
-import Explore from '../components/Explore';
-import { resetErrorMessage } from '../actions';
-import '../modules/Core/less/style';
+//import Explore from '../components/Explore';
+import { resetErrorMessage } from './actions';
+import {sendLogout} from './actions/ja'
+import './less/style';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
     this.handleDismissClick = this.handleDismissClick.bind(this);
+    this.logout = this.logout.bind(this);
   }
 
   handleDismissClick(e) {
@@ -20,6 +22,11 @@ class App extends Component {
 
   handleChange(nextValue) {
     this.props.pushState(null, `/${nextValue}`);
+  }
+
+  logout(e) {
+    e.preventDefault();
+    this.props.sendLogout();
   }
 
   renderErrorMessage() {
@@ -47,13 +54,14 @@ class App extends Component {
         <div>
           <Link to={`/jobs`}>
             Jobs
-          </Link> | &nbsp; 
+          </Link> | {' '} 
           <Link to={`/stats`}>
             Stats
-          </Link>
+          </Link> | {' '}
+          <a  href="#" onClick={this.logout}>
+            Logout
+          </a>
         </div>
-        <Explore value={inputValue}
-                 onChange={this.handleChange} />
         <hr />
         {this.renderErrorMessage()}
         <div className="container">
@@ -61,6 +69,9 @@ class App extends Component {
         </div>
       </div>
     );
+
+    //<Explore value={inputValue}
+    //         onChange={this.handleChange} />
   }
 }
 
@@ -83,5 +94,6 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, {
   resetErrorMessage,
-  pushState
+  pushState,
+  sendLogout
 })(App);

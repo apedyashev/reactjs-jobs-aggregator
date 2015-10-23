@@ -19,6 +19,9 @@ export default (
   </Route>
 );
 
+//<Route path="*" component={NoMatch}/>
+
+
 //<Route path="/:login/:name"
 //       component={RepoPage} />
 //<Route path="/:login"

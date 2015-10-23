@@ -15,6 +15,7 @@ class App extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleDismissClick = this.handleDismissClick.bind(this);
     this.logout = this.logout.bind(this);
+    this.handleTabActive = this.handleTabActive.bind(this);
   }
 
   handleDismissClick(e) {
@@ -24,6 +25,10 @@ class App extends Component {
 
   handleChange(nextValue) {
     this.props.pushState(null, `/${nextValue}`);
+  }
+
+  handleTabActive(tab) {
+    this.props.pushState(null, `/${tab.props.route}`);
   }
 
   logout(e) {
@@ -60,7 +65,10 @@ class App extends Component {
               className="nav-items"
               initialSelectedIndex={1}>
             <Tab label="Dashboard"
-                className="item"/>
+                route="jobs"
+                className="item"
+                value="a"
+                onActive={this.handleTabActive}/>
             <Tab label="Statistics" className="item"/>
           </Tabs>
         </AppBar>

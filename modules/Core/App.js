@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { pushState } from 'redux-router';
 import { Link } from 'react-router';
 //import Explore from '../components/Explore';
+import AppBar from 'material-ui/lib/app-bar';
+import {Tab, Tabs} from 'material-ui/lib/tabs';
 import { resetErrorMessage } from './actions';
 import {sendLogout} from './actions/ja'
 import './less/style';
@@ -51,18 +53,28 @@ class App extends Component {
     const { children, inputValue } = this.props;
     return (
       <div>
-        <div>
-          <Link to={`/jobs`}>
-            Jobs
-          </Link> | {' '} 
-          <Link to={`/stats`}>
-            Stats
-          </Link> | {' '}
-          <a  href="#" onClick={this.logout}>
-            Logout
-          </a>
-        </div>
-        <hr />
+        <AppBar showMenuIconButton={false}
+                className="app-bar"
+                title="Jobs Aggregator">
+          <Tabs inkBarStyle={{backgroundColor: '#FFF59D'}}
+              className="nav-items"
+              initialSelectedIndex={1}>
+            <Tab label="Dashboard"
+                className="item"/>
+            <Tab label="Statistics" className="item"/>
+          </Tabs>
+        </AppBar>
+
+        <Link to={`/jobs`}>
+          Dashboard
+        </Link> | {' '}
+        <Link to={`/stats`}>
+          Stats
+        </Link> | {' '}
+        <a  href="#" onClick={this.logout}>
+          Logout
+        </a>
+
         {this.renderErrorMessage()}
         <div className="container">
           {children}

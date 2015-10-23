@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { submitLoginForm } from './actions';
-import RaisedButton from 'material-ui/src/raised-button';
+import RaisedButton from 'material-ui/lib/raised-button';
 import TextField from 'material-ui/src/text-field';
 import './less/style';
 

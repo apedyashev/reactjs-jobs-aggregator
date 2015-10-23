@@ -23,7 +23,7 @@
     "less": "^2.5.3",
     "less-loader": "^2.2.1",
     "lodash": "^3.10.1",
-    "material-ui": "callemall/material-ui",
+    "material-ui": "^0.13.0",
     "normalizr": "^1.0.0",
     "react": "^0.14.0-rc1",
     "react-dom": "^0.14.0-rc1",

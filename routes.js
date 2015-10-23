@@ -12,7 +12,7 @@ export default (
   <Route path="/" component={App}>
     <Route path="jobs"
             component={JobsPage} />
-    <Route path="stats"
+    <Route path="statistics"
             component={StatsPage} />
     <Route path="login"
             component={LoginPage} />        

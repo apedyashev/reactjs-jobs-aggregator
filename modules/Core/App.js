@@ -28,7 +28,7 @@ class App extends Component {
   }
 
   handleTabActive(tab) {
-    this.props.pushState(null, `/${tab.props.route}`);
+    this.props.pushState(null, `/${tab.props.value}`);
   }
 
   logout(e) {
@@ -55,6 +55,8 @@ class App extends Component {
   }
 
   render() {
+    // I'm not sure why inputValue contains current path
+    const currentPath = this.props.inputValue;
     const { children, inputValue } = this.props;
     return (
       <div>
@@ -63,22 +65,21 @@ class App extends Component {
                 title="Jobs Aggregator">
           <Tabs inkBarStyle={{backgroundColor: '#FFF59D'}}
               className="nav-items"
-              initialSelectedIndex={1}>
+              valueLink={{
+                value: currentPath,
+                requestChange: ()=> {}
+              }}>
             <Tab label="Dashboard"
-                route="jobs"
+                value="jobs"
                 className="item"
-                value="a"
                 onActive={this.handleTabActive}/>
-            <Tab label="Statistics" className="item"/>
+            <Tab label="Statistics"
+                className="item"
+                value="statistics"
+                onActive={this.handleTabActive}/>
           </Tabs>
         </AppBar>
 
-        <Link to={`/jobs`}>
-          Dashboard
-        </Link> | {' '}
-        <Link to={`/stats`}>
-          Stats
-        </Link> | {' '}
         <a  href="#" onClick={this.logout}>
           Logout
         </a>

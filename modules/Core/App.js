@@ -4,9 +4,9 @@ import { pushState } from 'redux-router';
 import { Link } from 'react-router';
 //import Explore from '../components/Explore';
 import AppBar from 'material-ui/lib/app-bar';
-import {Tab, Tabs} from 'material-ui/lib/tabs';
+import { Tab, Tabs } from 'material-ui/lib/tabs';
 import { resetErrorMessage } from './actions';
-import {sendLogout} from './actions/ja'
+import { sendLogout, loadLoggedUser } from './actions/ja'
 import './less/style';
 
 class App extends Component {
@@ -16,6 +16,17 @@ class App extends Component {
     this.handleDismissClick = this.handleDismissClick.bind(this);
     this.logout = this.logout.bind(this);
     this.handleTabActive = this.handleTabActive.bind(this);
+  }
+
+  componentWillMount() {
+    this.props.loadLoggedUser();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (!this.loaded) {
+      this.loaded = true;
+      this.props.loadLoggedUser();
+    }
   }
 
   handleDismissClick(e) {
@@ -57,27 +68,52 @@ class App extends Component {
   render() {
     // I'm not sure why inputValue contains current path
     const currentPath = this.props.inputValue;
-    const { children, inputValue } = this.props;
-    return (
-      <div>
-        <AppBar showMenuIconButton={false}
-                className="app-bar"
-                title="Jobs Aggregator">
+    const { children, inputValue, loggedUser } = this.props;
+
+    let navbar = (
+        <Tabs inkBarStyle={{backgroundColor: '#FFF59D'}}
+            className="nav-items"
+            valueLink={{
+              value: currentPath,
+              requestChange: ()=> {}
+            }}>
+          <Tab  label="Login"
+              value="login"
+              className="item"
+              onActive={this.handleTabActive}/>
+          <Tab label="Register"
+              value="register"
+              className="item"
+              onActive={this.handleTabActive}/>
+        </Tabs>
+    );
+
+    if (loggedUser) {
+      navbar = (
           <Tabs inkBarStyle={{backgroundColor: '#FFF59D'}}
               className="nav-items"
               valueLink={{
                 value: currentPath,
                 requestChange: ()=> {}
               }}>
-            <Tab label="Dashboard"
+            <Tab  label="Dashboard"
                 value="jobs"
                 className="item"
                 onActive={this.handleTabActive}/>
             <Tab label="Statistics"
-                className="item"
                 value="statistics"
+                className="item"
                 onActive={this.handleTabActive}/>
           </Tabs>
+      );
+    }
+
+    return (
+      <div>
+        <AppBar showMenuIconButton={false}
+                className="app-bar"
+                title="Jobs Aggregator">
+          {navbar}
         </AppBar>
 
         <a  href="#" onClick={this.logout}>
@@ -102,19 +138,24 @@ App.propTypes = {
   resetErrorMessage: PropTypes.func.isRequired,
   pushState: PropTypes.func.isRequired,
   inputValue: PropTypes.string.isRequired,
+  loadLoggedUser: PropTypes.func.isRequired,
   // Injected by React Router
-  children: PropTypes.node
+  children: PropTypes.node,
 };
 
 function mapStateToProps(state) {
+  const loggedUser = state.entities.loggedUser || null;
+  console.log('state.entities.loggedUser', loggedUser);
   return {
     errorMessage: state.errorMessage,
-    inputValue: state.router.location.pathname.substring(1)
+    inputValue: state.router.location.pathname.substring(1),
+    loggedUser
   };
 }
 
 export default connect(mapStateToProps, {
   resetErrorMessage,
   pushState,
-  sendLogout
+  sendLogout,
+  loadLoggedUser
 })(App);

@@ -7,6 +7,7 @@ import App from './modules/Core/App';
 import StatsPage    from './modules/StatsPage/StatsPage';
 import JobsPage     from './modules/JobsPage';
 import LoginPage    from './modules/LoginPage';
+import RegisterPage from './modules/RegisterPage';
 
 export default (
   <Route path="/" component={App}>
@@ -15,7 +16,9 @@ export default (
     <Route path="statistics"
             component={StatsPage} />
     <Route path="login"
-            component={LoginPage} />        
+            component={LoginPage} />
+    <Route path="register"
+            component={RegisterPage} />
   </Route>
 );
 

@@ -37,3 +37,23 @@ export function sendLogout(){
     return dispatch(logout());
   };
 }
+
+export const LOGGED_USER_REQUEST = 'LOGGED_USER_REQUEST';
+export const LOGGED_USER_SUCCESS = 'LOGGED_USER_SUCCESS';
+export const LOGGED_USER_FAILURE = 'LOGGED_USER_FAILURE';
+
+function fetchLoggedUser() {
+  return {
+    [JA_CALL_API]: {
+      types: [LOGGED_USER_REQUEST, LOGGED_USER_SUCCESS, LOGGED_USER_FAILURE],
+      endpoint: `users/me`,
+      jsonRoot: 'loggedUser'
+    }
+  };
+}
+export function loadLoggedUser(){
+  return (dispatch, getState) => {
+    return dispatch(fetchLoggedUser());
+  };
+}
+

@@ -32,11 +32,12 @@ module.exports = {
         //  plugins: []
         //}
       },
-      {
-        test: /\.jsx?$/,
-        loader: 'babel',
-        include: /material-ui/
-      },
+      // TODO: just for reference. delete this in the future
+      //{
+      //  test: /\.jsx?$/,
+      //  loader: 'babel',
+      //  include: /material-ui/
+      //},
       {
         test: /\.less$/,
         loaders: ['style', 'css', 'less'],

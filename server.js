@@ -8,7 +8,7 @@ import webpackConfig from './webpack.config'
 
 import React from 'react'
 import { Router, match, RouterContext } from 'react-router';
-import { renderToString } from 'react-dom/server'
+import { renderToString, renderToStaticMarkup } from 'react-dom/server'
 //import Location   from 'react-router/lib/Location';
 import { Provider } from 'react-redux'
 
@@ -122,7 +122,7 @@ app.use((req, res) => {
       // Grab the initial state from our Redux store
       const finalState = store.getState();
       //Render the component to a string
-      const html = renderToString(
+      const html = renderToStaticMarkup(
           <Provider store={store}>
              <RouterContext {...renderProps}/>
           </Provider>

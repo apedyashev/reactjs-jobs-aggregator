@@ -20,6 +20,8 @@ if (isClient) {
   //https://github.com/zilverline/react-tap-event-plugin
   injectTapEventPlugin();
 
+  //You only render the <Router> with browser history on the client; on the server,
+  // you just pass the routes (but not the <Router>) to the <RoutingContext>.
   render(
     <Provider store = {store}>
       <Router history={browserHistory}>{routes}</Router>
@@ -28,17 +30,10 @@ if (isClient) {
   );
 }
 
-//render(
-//  <Provider store={store}>
-//    <ReduxRouter />
-//  </Provider>,
-//  document.getElementById('root')
-//);
-
-if (process.env.NODE_ENV !== 'production') {
-  // Use require because imports can't be conditional.
-  // In production, you should ensure process.env.NODE_ENV
-  // is envified so that Uglify can eliminate this
-  // module and its dependencies as dead code.
-  require('./createDevToolsWindow')(store);
-}
+//if (process.env.NODE_ENV !== 'production') {
+//  // Use require because imports can't be conditional.
+//  // In production, you should ensure process.env.NODE_ENV
+//  // is envified so that Uglify can eliminate this
+//  // module and its dependencies as dead code.
+//  require('./createDevToolsWindow')(store);
+//}

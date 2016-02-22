@@ -3,9 +3,10 @@ import merge from 'lodash/object/merge';
 import paginate from './paginate';
 import { routerStateReducer as router } from 'redux-router';
 import { combineReducers } from 'redux';
+import { routeReducer } from 'react-router-redux'
 
 // Updates an entity cache in response to any action with response.entities.
-function entities(state = { users: {}, repos: {} }, action) {
+function entities(state = { users: {} }, action) {
   if (action.response && action.response.json) {
     return merge({}, state, action.response.json);
   }
@@ -50,11 +51,12 @@ function errorMessage(state = null, action) {
 //   return null;
 // }
 
+
 const rootReducer = combineReducers({
   entities,
   //pagination,
   errorMessage,
-  router
+  router: routeReducer
   // loggedUser
 });
 

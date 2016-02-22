@@ -1,9 +1,11 @@
+'use strict';
+
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { submitLoginForm } from './actions';
-import RaisedButton from 'material-ui/lib/raised-button';
-import TextField from 'material-ui/src/text-field';
-import './less/style';
+//let RaisedButton = require('material-ui/lib/raised-button').RaisedButton;
+//let TextField = require('material-ui/src/text-field').TextField;
+//import './less/style';
 
 class LoginPage extends Component {
   constructor(props) {
@@ -18,36 +20,37 @@ class LoginPage extends Component {
   }
 
   render() {
-    return (
-      <form className="form-login">
-        <div className="row">
-          <div className="col-xs-12 text-center">
-            <h3>Login</h3>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-xs-12">
-            <TextField
-              hintText="Please, enter your email"
-              floatingLabelText="Email" 
-              ref="email"/>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-xs-12">
-            <TextField
-              hintText="Please, enter your password"
-              floatingLabelText="Password" 
-              ref="password"/>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-xs-12 text-center">
-            <RaisedButton label="Submit" onClick={this.submitForm}/>
-          </div>
-        </div>
-      </form>
-      );
+    return (<div>Login</div>);
+    //return (
+    //  <form className="form-login">
+    //    <div className="row">
+    //      <div className="col-xs-12 text-center">
+    //        <h3>Login</h3>
+    //      </div>
+    //    </div>
+    //    <div className="row">
+    //      <div className="col-xs-12">
+    //        <TextField
+    //          hintText="Please, enter your email"
+    //          floatingLabelText="Email"
+    //          ref="email"/>
+    //      </div>
+    //    </div>
+    //    <div className="row">
+    //      <div className="col-xs-12">
+    //        <TextField
+    //          hintText="Please, enter your password"
+    //          floatingLabelText="Password"
+    //          ref="password"/>
+    //      </div>
+    //    </div>
+    //    <div className="row">
+    //      <div className="col-xs-12 text-center">
+    //        <RaisedButton label="Submit" onClick={this.submitForm}/>
+    //      </div>
+    //    </div>
+    //  </form>
+    //  );
   }
 }
 

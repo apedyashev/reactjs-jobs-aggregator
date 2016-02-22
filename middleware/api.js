@@ -1,3 +1,6 @@
+/**
+ * TODO: get rid of this file
+ */
 import { Schema, arrayOf, normalize } from 'normalizr';
 import { camelizeKeys } from 'humps';
 import 'isomorphic-fetch';

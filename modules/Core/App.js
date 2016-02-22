@@ -3,11 +3,14 @@ import { connect } from 'react-redux';
 import { pushState } from 'redux-router';
 import { Link } from 'react-router';
 //import Explore from '../components/Explore';
-import AppBar from 'material-ui/lib/app-bar';
-import { Tab, Tabs } from 'material-ui/lib/tabs';
+
+//let AppBar = require('material-ui/src/app-bar').AppBar;
+//let Tab = require('material-ui/lib/tabs').Tab;
+//let Tabs = require('material-ui/lib/tabs').Tabs;
+
 import { resetErrorMessage } from './actions';
 import { sendLogout, loadLoggedUser } from './actions/ja'
-import './less/style';
+//import './less/style';
 
 class App extends Component {
   constructor(props) {
@@ -47,88 +50,88 @@ class App extends Component {
     this.props.sendLogout();
   }
 
-  renderErrorMessage() {
-    const { errorMessage } = this.props;
-    if (!errorMessage) {
-      return null;
-    }
-
-    return (
-      <p style={{ backgroundColor: '#e99', padding: 10 }}>
-        <b>{errorMessage}</b>
-        {' '}
-        (<a href="#"
-            onClick={this.handleDismissClick}>
-          Dismiss
-        </a>)
-      </p>
-    );
-  }
+  //renderErrorMessage() {
+  //  const { errorMessage } = this.props;
+  //  if (!errorMessage) {
+  //    return null;
+  //  }
+  //
+  //  return (
+  //    <p style={{ backgroundColor: '#e99', padding: 10 }}>
+  //      <b>{errorMessage}</b>
+  //      {' '}
+  //      (<a href="#"
+  //          onClick={this.handleDismissClick}>
+  //        Dismiss
+  //      </a>)
+  //    </p>
+  //  );
+  //}
 
   render() {
+    return (<div>App</div>);
+
     // I'm not sure why inputValue contains current path
     const currentPath = this.props.inputValue;
     const { children, inputValue, loggedUser } = this.props;
 
-    let navbar = (
-        <Tabs inkBarStyle={{backgroundColor: '#FFF59D'}}
-            className="nav-items"
-            valueLink={{
-              value: currentPath,
-              requestChange: ()=> {}
-            }}>
-          <Tab  label="Login"
-              value="login"
-              className="item"
-              onActive={this.handleTabActive}/>
-          <Tab label="Register"
-              value="register"
-              className="item"
-              onActive={this.handleTabActive}/>
-        </Tabs>
-    );
+    //let navbar = (
+    //    <Tabs inkBarStyle={{backgroundColor: '#FFF59D'}}
+    //        className="nav-items"
+    //        valueLink={{
+    //          value: currentPath,
+    //          requestChange: ()=> {}
+    //        }}>
+    //      <Tab  label="Login"
+    //          value="login"
+    //          className="item"
+    //          onActive={this.handleTabActive}/>
+    //      <Tab label="Register"
+    //          value="register"
+    //          className="item"
+    //          onActive={this.handleTabActive}/>
+    //    </Tabs>
+    //);
+    //
+    //if (loggedUser) {
+    //  navbar = (
+    //      <Tabs inkBarStyle={{backgroundColor: '#FFF59D'}}
+    //          className="nav-items"
+    //          valueLink={{
+    //            value: currentPath,
+    //            requestChange: ()=> {}
+    //          }}>
+    //        <Tab  label="Dashboard"
+    //            value="jobs"
+    //            className="item"
+    //            onActive={this.handleTabActive}/>
+    //        <Tab label="Statistics"
+    //            value="statistics"
+    //            className="item"
+    //            onActive={this.handleTabActive}/>
+    //      </Tabs>
+    //  );
+    //}
 
-    if (loggedUser) {
-      navbar = (
-          <Tabs inkBarStyle={{backgroundColor: '#FFF59D'}}
-              className="nav-items"
-              valueLink={{
-                value: currentPath,
-                requestChange: ()=> {}
-              }}>
-            <Tab  label="Dashboard"
-                value="jobs"
-                className="item"
-                onActive={this.handleTabActive}/>
-            <Tab label="Statistics"
-                value="statistics"
-                className="item"
-                onActive={this.handleTabActive}/>
-          </Tabs>
-      );
-    }
 
-    return (
-      <div>
-        <AppBar showMenuIconButton={false}
-                className="app-bar"
-                title="Jobs Aggregator">
-          {navbar}
-        </AppBar>
-
-        <a  href="#" onClick={this.logout}>
-          Logout
-        </a>
-
-        {this.renderErrorMessage()}
-        <div className="container">
-          {children}
-        </div>
-      </div>
-    );
-
-    //<Explore value={inputValue}
-    //         onChange={this.handleChange} />
+    //return (
+    //  <div>
+    //    <AppBar showMenuIconButton={false}
+    //            className="app-bar"
+    //            title="Jobs Aggregator">
+    //      {navbar}
+    //    </AppBar>
+    //
+    //    <a  href="#" onClick={this.logout}>
+    //      Logout
+    //    </a>
+    //
+    //    {this.renderErrorMessage()}
+    //    <div className="container">
+    //      {children}
+    //    </div>
+    //  </div>
+    //);
   }
 }
 

@@ -26,12 +26,16 @@ module.exports = {
         test: /\.js$/,
         loaders: ['babel'],
         exclude: /node_modules/,
-        include: __dirname
+        include: __dirname,
+        //query: {
+        //  stage: 0,
+        //  plugins: []
+        //}
       },
-      { 
-        test: /\.jsx?$/, 
-        loader: 'babel', 
-        include: /material-ui/ 
+      {
+        test: /\.jsx?$/,
+        loader: 'babel',
+        include: /material-ui/
       },
       {
         test: /\.less$/,
@@ -57,4 +61,15 @@ if (fs.existsSync(reduxSrc) && fs.existsSync(reduxNodeModules)) {
     loaders: ['babel'],
     include: reduxSrc
   });
+}
+
+if (process.env.HOT) {
+  module.exports.module.loaders[0].query.plugins.push('react-transform');
+  module.exports.module.loaders[0].query.extra = {
+    'react-transform': [{
+      target: 'react-transform-hmr',
+      imports: ['react-native'],
+      locals: ['module']
+    }]
+  };
 }

@@ -1,7 +1,8 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { reduxReactRouter } from 'redux-router';
 import { devTools } from 'redux-devtools';
-import createHistory from 'history/lib/createBrowserHistory';
+import createBrowserHistory from 'history/lib/createBrowserHistory';
+import {createMemoryHistory} from 'history';
 import routes from '../routes';
 import thunk from 'redux-thunk';
 import api from '../middleware/api';
@@ -9,6 +10,8 @@ import jaApi from '../middleware/ja-api';
 import createLogger from 'redux-logger';
 import rootReducer from '../reducers';
 
+const isClient = typeof document !== 'undefined';
+const createHistory = isClient ? createBrowserHistory : createMemoryHistory;
 const finalCreateStore = compose(
   applyMiddleware(thunk, api, jaApi),
   reduxReactRouter({ routes, createHistory }),

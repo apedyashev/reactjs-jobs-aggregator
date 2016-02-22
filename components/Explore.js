@@ -1,3 +1,6 @@
+/**
+ * TODO: get rid of this file
+ */
 import React, { Component, PropTypes } from 'react';
 
 

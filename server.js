@@ -104,12 +104,18 @@ function renderFullPage(html, initialState) {
     `
 }
 
-//import { createLocation } from 'history'
+import { createMemoryHistory } from 'react-router'
+import { syncHistoryWithStore } from 'react-router-redux'
+
 app.use((req, res) => {
   //const location = new Location(req.path, req.query);
   //const location = createLocation(req.url)
 
-  match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
+  const memoryHistory = createMemoryHistory(req.url);
+  let store = configureStore(memoryHistory);
+  const history = syncHistoryWithStore(memoryHistory, store);
+
+  match({history, routes, location: req.url }, (error, redirectLocation, renderProps) => {
     if (redirectLocation) {
       res.redirect(301, redirectLocation.pathname + redirectLocation.search)
     } else if (error) {
@@ -117,11 +123,10 @@ app.use((req, res) => {
     } else if (renderProps == null) {
       res.send(404, 'Not found')
     } else if (renderProps) {
-      const store = configureStore();
-
       // Grab the initial state from our Redux store
       const finalState = store.getState();
       //Render the component to a string
+      store = configureStore(memoryHistory, finalState )
       const html = renderToStaticMarkup(
           <Provider store={store}>
              <RouterContext {...renderProps}/>

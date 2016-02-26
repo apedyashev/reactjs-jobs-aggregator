@@ -10,22 +10,44 @@ import jaApi from '../middleware/ja-api';
 import createLogger from 'redux-logger';
 import rootReducer from '../reducers';
 import { browserHistory } from 'react-router';
-import { syncHistory } from 'react-router-redux'
+import { routerMiddleware } from 'react-router-redux';
 
-
-const isClient = typeof document !== 'undefined';
-const createHistory = isClient ? createBrowserHistory() : createMemoryHistory();
-const reduxRouterMiddleware = syncHistory(createHistory);
-const finalCreateStore = compose(
-  applyMiddleware(thunk, api, jaApi),
-  applyMiddleware(reduxRouterMiddleware),
-  applyMiddleware(createLogger()),
-  devTools()
-)(createStore);
-
-export default function configureStore(initialState) {
+//const isClient = typeof document !== 'undefined';
+////const createHistory = isClient ? createBrowserHistory() : createMemoryHistory();
+//const createHistory = isClient ? browserHistory : createMemoryHistory();
+//const reduxRouterMiddleware = routerMiddleware(createHistory);
+//const finalCreateStore = compose(
+//  applyMiddleware(thunk, api, jaApi),
+//  applyMiddleware(reduxRouterMiddleware),
+//  applyMiddleware(createLogger()),
+//  devTools()
+//)(createStore);
+export default function configureStore(history, initialState) {
+  if (!history) {
+    throw new Error(`The first param history must be defined`);
+  }
+  ////const store = finalCreateStore(rootReducer, initialState);
+  //const finalCreateStore = compose(
+  //    applyMiddleware(thunk, api, jaApi),
+  //    routerMiddleware(history),
+  //    applyMiddleware(createLogger()),
+  //    devTools()
+  //)(createStore);
+  //
   //const store = finalCreateStore(rootReducer, initialState);
-  const store = finalCreateStore(rootReducer, initialState);
+
+  const store = createStore(
+      rootReducer,
+      initialState,
+      compose(
+          applyMiddleware(
+              thunk, api, jaApi,
+              routerMiddleware(history)
+              //applyMiddleware(createLogger())
+              //devTools()
+          )
+      )
+  );
 
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers

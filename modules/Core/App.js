@@ -42,7 +42,6 @@ class App extends Component {
   }
 
   handleTabActive(tab) {
-      console.log(`/${tab.props.value}`);
     this.props.push(`/${tab.props.value}`);
   }
 
@@ -145,12 +144,12 @@ App.propTypes = {
   children: PropTypes.node,
 };
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
   const loggedUser = state.entities.loggedUser || null;
   console.log('state.entities.loggedUser', loggedUser);
   return {
     errorMessage: state.errorMessage,
-    inputValue: state.router.location.pathname.substring(1),
+    inputValue: ownProps.location.pathname.substring(1),
     loggedUser
   };
 }

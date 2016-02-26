@@ -1,15 +1,13 @@
-//import 'babel-core/polyfill';
 import 'babel-polyfill';
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { ReduxRouter } from 'redux-router';
 import { Router, browserHistory } from 'react-router';
 import configureStore from './store/configureStore';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import { syncHistoryWithStore } from 'react-router-redux';
 import routes from './routes';
-console.log('syncHistoryWithStore', syncHistoryWithStore);
+
 const isClient = typeof document !== 'undefined';
 if (isClient) {
   const store = configureStore(browserHistory, window.__INITIAL_STATE__);

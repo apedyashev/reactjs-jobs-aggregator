@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { pushState } from 'redux-router';
+import { push } from 'react-router-redux'
 import { Link } from 'react-router';
 //import Explore from '../components/Explore';
 
@@ -42,7 +42,8 @@ class App extends Component {
   }
 
   handleTabActive(tab) {
-    this.props.pushState(null, `/${tab.props.value}`);
+      console.log(`/${tab.props.value}`);
+    this.props.push(`/${tab.props.value}`);
   }
 
   logout(e) {
@@ -69,7 +70,6 @@ class App extends Component {
   //}
 
   render() {
-    // I'm not sure why inputValue contains current path
     const currentPath = this.props.inputValue;
     const { children, inputValue, loggedUser } = this.props;
 
@@ -138,7 +138,7 @@ App.propTypes = {
   // Injected by React Redux
   errorMessage: PropTypes.string,
   resetErrorMessage: PropTypes.func.isRequired,
-  pushState: PropTypes.func.isRequired,
+    push: PropTypes.func.isRequired,
   inputValue: PropTypes.string.isRequired,
   loadLoggedUser: PropTypes.func.isRequired,
   // Injected by React Router
@@ -157,7 +157,7 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, {
   resetErrorMessage,
-  pushState,
+    push,
   sendLogout,
   loadLoggedUser
 })(App);

@@ -7,6 +7,7 @@ import { Link } from 'react-router';
 import {AppBar} from 'material-ui/lib'
 import {Tab} from 'material-ui/lib'
 import {Tabs} from 'material-ui/lib'
+import Navbar from './components/Navbar'
 
 import { resetErrorMessage } from './actions';
 import { sendLogout, loadLoggedUser } from './actions/ja'
@@ -41,10 +42,6 @@ class App extends Component {
     this.props.pushState(null, `/${nextValue}`);
   }
 
-  handleTabActive(tab) {
-    this.props.push(`/${tab.props.value}`);
-  }
-
   logout(e) {
     e.preventDefault();
     this.props.sendLogout();
@@ -69,54 +66,13 @@ class App extends Component {
   //}
 
   render() {
-    const currentPath = this.props.inputValue;
-    const { children, inputValue, loggedUser } = this.props;
-
-    let navbar = (
-        <Tabs inkBarStyle={{backgroundColor: '#FFF59D'}}
-            className="nav-items"
-            valueLink={{
-              value: currentPath,
-              requestChange: ()=> {}
-            }}>
-          <Tab  label="Login"
-              value="login"
-              className="item"
-              onActive={this.handleTabActive}/>
-          <Tab label="Register"
-              value="register"
-              className="item"
-              onActive={this.handleTabActive}/>
-        </Tabs>
-    );
-    if (loggedUser) {
-      navbar = (
-          <Tabs inkBarStyle={{backgroundColor: '#FFF59D'}}
-              className="nav-items"
-              valueLink={{
-                value: currentPath,
-                requestChange: ()=> {}
-              }}>
-            <Tab  label="Dashboard"
-                value="jobs"
-                className="item"
-                onActive={this.handleTabActive}/>
-            <Tab label="Statistics"
-                value="statistics"
-                className="item"
-                onActive={this.handleTabActive}/>
-          </Tabs>
-      );
-    }
-
+    const currentPath = this.props.currentPath;
+    const { children, loggedUser } = this.props;
+    const isUserLogged = (loggedUser != null);
 
     return (
       <div>
-        <AppBar showMenuIconButton={false}
-                className="app-bar"
-                title="Jobs Aggregator">
-            {navbar}
-        </AppBar>
+        <Navbar isUserLogged={isUserLogged} currentPath={currentPath}/>
 
         <a  href="#" onClick={this.logout}>
           Logout
@@ -138,7 +94,7 @@ App.propTypes = {
   errorMessage: PropTypes.string,
   resetErrorMessage: PropTypes.func.isRequired,
     push: PropTypes.func.isRequired,
-  inputValue: PropTypes.string.isRequired,
+    currentPath: PropTypes.string.isRequired,
   loadLoggedUser: PropTypes.func.isRequired,
   // Injected by React Router
   children: PropTypes.node,
@@ -149,14 +105,14 @@ function mapStateToProps(state, ownProps) {
   console.log('state.entities.loggedUser', loggedUser);
   return {
     errorMessage: state.errorMessage,
-    inputValue: ownProps.location.pathname.substring(1),
+      currentPath: ownProps.location.pathname.substring(1),
     loggedUser
   };
 }
 
 export default connect(mapStateToProps, {
   resetErrorMessage,
-    push,
+  push,
   sendLogout,
   loadLoggedUser
 })(App);

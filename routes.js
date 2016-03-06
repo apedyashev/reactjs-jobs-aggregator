@@ -1,8 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router';
 import App from './modules/Core/App';
-//import UserPage from './containers/UserPage';
-//import RepoPage from './containers/RepoPage';
 
 import StatsPage    from './modules/StatsPage/StatsPage';
 import JobsPage     from './modules/JobsPage';

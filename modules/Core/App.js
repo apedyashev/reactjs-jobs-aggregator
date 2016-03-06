@@ -11,7 +11,10 @@ import Navbar from './components/Navbar'
 
 import { resetErrorMessage } from './actions';
 import { sendLogout, loadLoggedUser } from './actions/ja'
-//import './less/style';
+import './less/style';
+//import withStyles from 'isomorphic-style-loader/lib/withStyles';
+//import css from './app.css'
+//console.log(css);
 
 class App extends Component {
   constructor(props) {
@@ -19,7 +22,7 @@ class App extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleDismissClick = this.handleDismissClick.bind(this);
     this.logout = this.logout.bind(this);
-    this.handleTabActive = this.handleTabActive.bind(this);
+    //this.handleTabActive = this.handleTabActive.bind(this);
   }
 
   componentWillMount() {
@@ -74,7 +77,7 @@ class App extends Component {
       <div>
         <Navbar isUserLogged={isUserLogged} currentPath={currentPath}/>
 
-        <a  href="#" onClick={this.logout}>
+        <a href="#" onClick={this.logout}>
           Logout
         </a>
 

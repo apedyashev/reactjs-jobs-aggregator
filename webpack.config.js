@@ -1,6 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var nodeModulesPath = path.resolve(__dirname, 'node_modules');
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
   devtool: 'cheap-module-eval-source-map',
@@ -9,17 +10,18 @@ module.exports = {
     './index'
   ],
    resolve: {
-    extensions: ["", ".js", ".jsx", '.less']
+    extensions: ["", ".js", ".jsx", '.less', '.css']
   },
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, 'build'),
     filename: 'bundle.js',
     publicPath: '/static/'
   },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.NoErrorsPlugin(),
+    new ExtractTextPlugin("bundle.css")
   ],
   module: {
     loaders: [{
@@ -39,11 +41,34 @@ module.exports = {
       //  include: /material-ui/
       //},
       {
-        test: /\.less$/,
-        loaders: ['style', 'css', 'less'],
-        include: /less/ 
+        test: /\.css$/,
+        loader: 'isomorphic-style-loader!css-loader?modules&importLoaders=1!postcss-loader'
+      },
+      {
+        test: /\.less/,
+        //loader: 'style-loader!css-loader!less-loader',
+        loader: ExtractTextPlugin.extract("style-loader", "css-loader!less-loader"),
+        include: /less/
+      },
+      //{
+      //  test: /\.less$/,
+      //  loaders: ['style', 'css', 'postccs', 'less'],
+      //  include: /less/
+      //},
+      {
+        test: /\.scss$/,
+        loaders: [
+          'isomorphic-style-loader',
+          'css-loader?modules&localIdentName=[name]_[local]_[hash:base64:3]',
+          'postcss-loader'
+        ]
       }
     ]
+  },
+  postcss: function () {
+    return [
+      require("postcss-import"),
+    ];
   }
 };
 

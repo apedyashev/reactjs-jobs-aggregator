@@ -33,9 +33,9 @@ app.use((req, res) => {
     if (redirectLocation) {
       res.redirect(301, redirectLocation.pathname + redirectLocation.search)
     } else if (error) {
-      res.send(500, error.message)
+      res.status(500).send(error.message)
     } else if (renderProps == null) {
-      res.send(404, 'Not found')
+      res.status(404).send('Not found')
     } else if (renderProps) {
       // Grab the initial state from our Redux store
       const finalState = store.getState();
@@ -48,7 +48,7 @@ app.use((req, res) => {
       );
       res.render('index', {html, finalState});
     } else {
-      res.send(404, 'Not found')
+      res.status(404).send('Not found')
     }
   })
 

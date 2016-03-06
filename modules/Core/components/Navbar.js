@@ -61,7 +61,7 @@ class Navbar extends Component {
         }
 
         const appBarTitle = (
-            <Link to={`/`}>Jobs Aggregator</Link>
+            <Link className="site-title" to={`/`}>Jobs Aggregator</Link>
         );
         return (
             <AppBar showMenuIconButton={false}

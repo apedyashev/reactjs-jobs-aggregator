@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { submitLoginForm } from './actions';
 import {RaisedButton} from 'material-ui/lib'
 import {TextField} from 'material-ui/lib'
-//import './less/style';
+import './less/style';
 
 class LoginPage extends Component {
   constructor(props) {

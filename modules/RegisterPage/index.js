@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import {RaisedButton} from 'material-ui/lib'
 import {TextField} from 'material-ui/lib'
 import { submitRegisterForm } from './actions';
-//import './less/style';
+import './less/style';
 
 class RegisterPage extends Component {
   constructor(props) {

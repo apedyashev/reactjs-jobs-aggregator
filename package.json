@@ -45,8 +45,7 @@
     "redux-logger": "^2.5.2",
     "redux-router": "^1.0.0-beta7",
     "redux-thunk": "^1.0.3",
-    "style-loader": "^0.13.0",
-    "zepto-browserify": "^1.0.0"
+    "style-loader": "^0.13.0"
   },
   "devDependencies": {
     "babel-core": "^6.5.2",

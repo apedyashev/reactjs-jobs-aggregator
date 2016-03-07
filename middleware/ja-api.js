@@ -2,31 +2,40 @@ import 'isomorphic-fetch';
 import { Schema, arrayOf, normalize } from 'normalizr';
 import { camelizeKeys } from 'humps';
 import { pushState } from 'redux-router';
-import {$} from 'zepto-browserify';
-// window.$ = $;
+import _ from 'lodash';
+
 const API_ROOT = 'http://ja.rrs-lab.com/api/';
 const HTTP_STATUS_NOT_AUTHORIZED = 401;
 
-//function serialize(params, obj, traditional, scope){
-//  var type, array = $.isArray(obj);
-//  obj.forEach( function(key, value) {
-//    type = $.type(value)
-//    if (scope) key = traditional ? scope : scope + '[' + (array ? '' : key) + ']'
-//    // handle data in serializeArray() format
-//    if (!scope && array) params.add(value.name, value.value)
-//    // recurse into nested objects
-//    else if (type == "array" || (!traditional && type == "object"))
-//      serialize(params, value, traditional, key)
-//    else params.add(key, value)
-//  })
-//}
-//
-//function param(obj, traditional){
-//  var params = []
-//  params.add = function(k, v){ this.push(escape(k) + '=' + escape(v)) }
-//  serialize(params, obj, traditional)
-//  return params.join('&').replace(/%20/g, '+')
-//}
+function serialize(params, obj, traditional, scope){
+  var isArray = _.isArray(obj);
+  obj.forEach( function(key, value) {
+    //type = $.type(value)
+    if (scope) {
+      key = traditional ? scope : scope + '[' + (isArray ? '' : key) + ']';
+    }
+    // handle data in serializeArray() format
+    if (!scope && isArray) {
+      params.add(value.name, value.value);
+    }
+    // recurse into nested objects
+    else if (_.isArray(value) || (!traditional && _.isPlainObject(value))) {
+      serialize(params, value, traditional, key);
+    }
+    else {
+      params.add(key, value);
+    }
+  })
+}
+
+function param(obj, traditional){
+  var params = []
+  params.add = function(k, v){
+    this.push(escape(k) + '=' + escape(v))
+  };
+  serialize(params, obj, traditional);
+  return params.join('&').replace(/%20/g, '+')
+}
 
 // Fetches an API response and normalizes the result JSON according to schema.
 // This makes every API response have the same shape, regardless of how nested it was.
@@ -40,7 +49,7 @@ function callJaApi(endpoint, jsonRoot, method = 'GET', data) {
     fetchOptions.method = method;
   }
   if (data && Object.keys(data).length) {
-    fetchOptions.body = $.param(data);
+    fetchOptions.body = param(data);
     fetchOptions.headers = {
       'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'
     };

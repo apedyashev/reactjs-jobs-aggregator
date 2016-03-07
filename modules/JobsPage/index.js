@@ -1,9 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { loadJobs } from '../Core/actions/ja';
-import JobItem from './components/JobItem';
+import { loadJobs } from './actions/Job';
 import JobsSidebar from './components/Sidebar';
-import List from './components/List';
+import JobsList from './components/JobsList';
 import { pushState } from 'redux-router';
 
 function loadData(props) {
@@ -22,21 +21,8 @@ class JobsPage extends Component {
     }
   }
 
-  handleLoadMoreClick() {
-    // this.props.loadStargazers(this.props.fullName, true);
-  }
-
-  renderJob(job) {
-    return (
-        <JobItem job={job}
-                 key={job.id}>
-        </JobItem>
-      );
-  }
 
   render() {
-    const {jobs} = this.props;
-    console.debug('jobs', jobs);
     return (
       <div>
         <div style={{float:'left', width: '20%'}}>
@@ -44,11 +30,7 @@ class JobsPage extends Component {
         </div>
         <div style={{float:'left', width: '80%'}}>
           <h3>Jobs</h3>
-          <List renderItem={this.renderJob}
-                items={jobs}
-                onLoadMoreClick={this.handleLoadMoreClick}
-                loadingLabel={`Loading jobs...`}
-                />
+          <JobsList />
         </div>
       </div>
       );

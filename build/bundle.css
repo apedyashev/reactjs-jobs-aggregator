@@ -1438,3 +1438,14 @@ pre code {
   height: 64px !important;
   text-transform: uppercase;
 }
+.job-item:hover {
+  text-decoration: none;
+}
+.form-login {
+  max-width: 300px;
+  margin: 0 auto 20px;
+}
+.form-register {
+  max-width: 600px;
+  margin: 0 auto 20px;
+}

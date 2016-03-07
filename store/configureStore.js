@@ -2,6 +2,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import api from '../middleware/api';
 import jaApi from '../middleware/ja-api';
+import loginSuccessMiddleware from '../middleware/LoginSuccess.js';
 import createLogger from 'redux-logger';
 import rootReducer from '../reducers';
 import { routerMiddleware } from 'react-router-redux';
@@ -22,7 +23,7 @@ export default function configureStore(history, initialState) {
       initialState,
       compose(
           applyMiddleware(
-              thunk, api, jaApi,
+              thunk, api, jaApi, loginSuccessMiddleware,
               routerMiddleware(history),
               ...middlewares
               //devTools()

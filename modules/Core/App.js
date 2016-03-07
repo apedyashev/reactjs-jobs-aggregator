@@ -96,8 +96,8 @@ App.propTypes = {
   // Injected by React Redux
   errorMessage: PropTypes.string,
   resetErrorMessage: PropTypes.func.isRequired,
-    push: PropTypes.func.isRequired,
-    currentPath: PropTypes.string.isRequired,
+  push: PropTypes.func.isRequired,
+  currentPath: PropTypes.string.isRequired,
   loadLoggedUser: PropTypes.func.isRequired,
   // Injected by React Router
   children: PropTypes.node,

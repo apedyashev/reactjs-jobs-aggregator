@@ -1,6 +1,9 @@
 # reactjs-jobs-aggregator
 Front-end app that utulizes API of job aggregator from this repo https://github.com/apedyashev/meanjs-jobs-aggregator
 
+the project is currently under developed
+========================================
+
 ```Actions are payloads of information that send data from your application to your store. They are the only source of information for the store. You send them to the store using store.dispatch().
 ```
 http://rackt.github.io/redux/docs/basics/Actions.html

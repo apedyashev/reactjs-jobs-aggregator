@@ -42,6 +42,7 @@ module.exports = {
     "no-console": "off",
     "no-param-reassign": "off",
     "react/prop-types": "off",
-    "react/prefer-stateless-function": "warn"
+    "react/prefer-stateless-function": "warn",
+    "react/no-string-refs": "off"
   }
 }

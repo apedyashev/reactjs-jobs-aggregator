@@ -84,6 +84,7 @@
     "history": "2.1.0",
     "humps": "1.1.0",
     "lodash": "4.11.1",
+    "lost": "7.0.4",
     "material-ui": "0.15.4",
     "normalize.css": "4.2.0",
     "normalizr": "2.2.1",

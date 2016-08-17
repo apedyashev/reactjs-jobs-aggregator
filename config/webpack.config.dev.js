@@ -86,6 +86,7 @@ module.exports = {
         browsers: ['last 2 versions'],
       }),
       require('postcss-nested'),
+      require('lost'),
     ];
   },
   devServer: {

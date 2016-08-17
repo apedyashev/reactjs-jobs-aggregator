@@ -1,0 +1,11 @@
+section {
+  lost-utility: clearfix;
+  div {
+    lost-column: 1/2;
+  }
+}
+
+.container {
+  width: 300px;
+  margin: 0 auto;
+}

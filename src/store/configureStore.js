@@ -1,6 +1,8 @@
 import {createStore, applyMiddleware, compose} from 'redux';
 import createSagaMiddleware, {END} from 'redux-saga';
 import createLogger from 'redux-logger';
+import {browserHistory} from 'react-router';
+import {routerMiddleware} from 'react-router-redux';
 /* eslint-disable import/no-extraneous-dependencies, import/no-unresolved */
 import rootReducer from 'reducers';
 /* eslint-enable import/no-extraneous-dependencies, import/no-unresolved */
@@ -23,10 +25,10 @@ export default function configureStore(initialState) {
     middleware = applyMiddleware(...middlewares);
     enhancer = compose(
       middleware,
-      applyMiddleware(sagaMiddleware, logger),
+      applyMiddleware(sagaMiddleware, routerMiddleware(browserHistory), logger),
     );
   } else {
-    enhancer = compose(middleware, applyMiddleware(sagaMiddleware));
+    enhancer = compose(middleware, applyMiddleware(sagaMiddleware, routerMiddleware(browserHistory)));
   }
 
   const store = createStore(rootReducer, initialState, enhancer);

@@ -43,6 +43,7 @@ module.exports = {
     "no-param-reassign": "off",
     "react/prop-types": "off",
     "react/prefer-stateless-function": "warn",
-    "react/no-string-refs": "off"
+    "react/no-string-refs": "off",
+    "react/sort-comp": "off"
   }
 }

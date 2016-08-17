@@ -6,9 +6,9 @@ import selectors from 'reducers/selectors';
 import {fetchEntity} from 'helpers/sagas';
 import {loadStarred} from 'sagas/StarredRepos';
 
-const schemas = {
+export const schemas = {
   user: new Schema('users', {
-    idAttribute: 'login',
+    // idAttribute: 'login',
   }),
 };
 export const fetchUser = fetchEntity.bind(null, user, (login) => {

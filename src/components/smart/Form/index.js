@@ -1,24 +1,27 @@
 // libs
 import React from 'react';
-// import {connect} from 'react-redux';
+import {connect} from 'react-redux';
 import _ from 'lodash';
 // actions
 // components
 
-export default (options/* , mapStateToProps, mapDispatchToProps*/) => {
+export default (options, mapStateToProps, mapDispatchToProps) => {
   if (!_.isArray(options.fields)) {
     throw new Error('Please specify the fields array');
   }
 
   return (Form) => {
     // const ConnectedForm = connect(mapStateToProps, mapDispatchToProps)(Form);
+
     class ReduxForm extends React.Component {
       state = {};
       fields = options.fields;
       isValid = true;
 
       componentWillMount() {
-        const initialValues = {email: 'user@example.com', password: '12345678'};
+        console.log('this.props.initialValues', this.props.initialValues);
+        // const initialValues = {email: 'user@example.com', password: '12345678'};
+        const initialValues = (this.props && _.isPlainObject(this.props.initialValues)) ? this.props.initialValues : {};
         const fields = _(this.fields).zipObject().mapValues((value, fieldName) => {
           const objectField = {
             name: fieldName,
@@ -95,7 +98,7 @@ export default (options/* , mapStateToProps, mapDispatchToProps*/) => {
         />);
       }
     }
-    return ReduxForm;
-    // return connect(mapStateToProps, mapDispatchToProps)(ReactForm);
+    return connect(mapStateToProps, mapDispatchToProps)(ReduxForm);
+    // return ReduxForm;
   };
 };

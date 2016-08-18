@@ -1,6 +1,6 @@
 // libs
 import React from 'react';
-import {connect} from 'react-redux';
+// import {connect} from 'react-redux';
 // actions
 import {submitLogin} from 'actions/Login';
 // components
@@ -55,21 +55,23 @@ function validation(values) {
 }
 
 
-export default connect(() => {
-  return {};
-}, {
-  submitLogin,
-})(reactForm({
-  fields: ['email', 'password'],
-  validation,
-})(LoginForm));
-
-// export default reactForm({
-//   fields: ['email', 'password'],
-//   validation,
-// }, (state, ownProps) => { // select
-//   console.log('***', state, ownProps);
+// export default connect(() => {
 //   return {};
 // }, {
-//   submitLogin
-// })(LoginForm);
+//   submitLogin,
+// })(reactForm({
+//   fields: ['email', 'password'],
+//   validation,
+// })(LoginForm));
+
+export default reactForm({
+  fields: ['email', 'password'],
+  validation,
+}, (state, ownProps) => { // select
+  console.log('***', state, ownProps);
+  return {
+    initialValues: {email: 'user@example.com', password: '12345678'},
+  };
+}, {
+  submitLogin,
+})(LoginForm);

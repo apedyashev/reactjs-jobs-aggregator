@@ -1,19 +1,23 @@
 /* eslint react/prefer-stateless-function: "off" */
 // libs
-import React from 'react';
+import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 
 import _ from 'lodash';
 // actions
+import {loadDashboardPage} from 'actions/Dashboard';
 // components
 import {Link} from 'react-router';
 import ListItem from 'components/dumb/ListItem';
 
 class DashboardPage extends React.Component {
   static propTypes = {
-    // loadLoggedUser: PropTypes.func.isRequired,
+    loadDashboardPage: PropTypes.func.isRequired,
   };
 
+  componentWillMount() {
+    this.props.loadDashboardPage();
+  }
 
   render() {
     const {repos} = this.props;
@@ -34,5 +38,5 @@ function select(state /* , ownProps */) {
 }
 
 export default connect(select, {
-
+  loadDashboardPage,
 })(DashboardPage);

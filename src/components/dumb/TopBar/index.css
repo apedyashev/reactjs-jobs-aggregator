@@ -1,14 +1,17 @@
 .container {
   overflow: hidden;
-  .item {
+  .items {
     float: right;
-    text-decoration: none;
-    [type="button"] {
-      -webkit-appearance: none !important;
-      appearance: none !important;
+    .item {
+      float: left;
+      text-decoration: none;
+      [type="button"] {
+        -webkit-appearance: none !important;
+        appearance: none !important;
+      }
     }
-  }
-  .active {
-    border-top: 3px solid red;
+    .active {
+      border-top: 3px solid red;
+    }
   }
 }

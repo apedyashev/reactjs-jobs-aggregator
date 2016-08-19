@@ -33,7 +33,7 @@ class App extends Component {
     return (
       <MuiThemeProvider muiTheme={getMuiTheme(muiTheme)}>
         <div>
-          <TopBar />
+          <TopBar authenticated />
           {this.props.children}
         </div>
       </MuiThemeProvider>

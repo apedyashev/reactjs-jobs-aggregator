@@ -5,10 +5,7 @@
     .item {
       float: left;
       text-decoration: none;
-      [type="button"] {
-        -webkit-appearance: none !important;
-        appearance: none !important;
-      }
+      
     }
     .active {
       border-top: 3px solid red;

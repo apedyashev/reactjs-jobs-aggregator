@@ -12,6 +12,7 @@ import injectTapEventPlugin from './InjectTapEventPlugin';
 import {loadLoggedUser} from 'actions/User';
 
 require('normalize.css');
+require('./normalizes-overwrites.css');
 
 class App extends Component {
   static propTypes = {

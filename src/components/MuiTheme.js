@@ -15,7 +15,7 @@ export default {
     primary2Color: '#fdf',
     primary3Color: '#afa',
     accent1Color: '#437e6f',
-    accent2Color: '#ccc',
+    accent2Color: '#cfc',
     accent3Color: '#cac',
     textColor: '#aaa',
     alternateTextColor: '#eee',

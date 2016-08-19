@@ -1,20 +1,20 @@
 import {createRequestTypes, action} from 'helpers/actions';
 
 export const actionTypes = createRequestTypes('USER');
-export const LOAD_USER_PAGE = 'LOAD_USER_PAGE';
+export const LOAD_LOGGED_USER = 'LOAD_LOGGED_USER';
 
 export const user = {
-  request: (login) => {
-    return action(actionTypes.REQUEST, {login});
+  request: () => {
+    return action(actionTypes.REQUEST, {});
   },
-  success: (login, response) => {
-    return action(actionTypes.SUCCESS, {login, response});
+  success: (id, response) => {
+    return action(actionTypes.SUCCESS, {response});
   },
-  failure: (login, error) => {
-    return action(actionTypes.FAILURE, {login, error});
+  failure: (error) => {
+    return action(actionTypes.FAILURE, {error});
   },
 };
 
-export const loadUserPage = (login, requiredFields = []) => {
-  return action(LOAD_USER_PAGE, {login, requiredFields});
+export const loadLoggedUser = () => {
+  return action(LOAD_LOGGED_USER);
 };

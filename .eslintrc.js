@@ -44,6 +44,7 @@ module.exports = {
     "react/prop-types": "off",
     "react/prefer-stateless-function": "warn",
     "react/no-string-refs": "off",
-    "react/sort-comp": "off"
+    "react/sort-comp": "off",
+    "import/imports-first": "off"
   }
 }

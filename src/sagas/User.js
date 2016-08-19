@@ -1,39 +1,36 @@
 import {take, call, fork, select} from 'redux-saga/effects';
-import {user, LOAD_USER_PAGE} from 'actions/User';
+import {user, LOAD_LOGGED_USER} from 'actions/User';
 import {Schema/* arrayOf */} from 'normalizr';
 import callApi from 'services/api';
 import selectors from 'reducers/selectors';
 import {fetchEntity} from 'helpers/sagas';
-import {loadStarred} from 'sagas/StarredRepos';
+// import {loadStarred} from 'sagas/StarredRepos';
 
 export const schemas = {
   user: new Schema('users', {
     // idAttribute: 'login',
   }),
 };
-export const fetchUser = fetchEntity.bind(null, user, (login) => {
-  return callApi(`users/${login}`, schemas.user);
+export const fetchUser = fetchEntity.bind(null, user, () => {
+  return callApi('/api/users/me', schemas.user);
 });
 
 // load user unless it is cached
-function* loadUser(login, requiredFields) {
-  const loadedUser = yield select(selectors.getUser, login);
+function* loadUser() {
+  const loadedUser = yield select(selectors.getUser);
 
-  if (!loadedUser || requiredFields.some((key) => {
-    return !loadedUser.hasOwnProperty(key);
-  })) {
-    yield call(fetchUser, login);
+  if (!loadedUser) {
+    yield call(fetchUser);
   }
 }
 
 // Fetches data for a User : user data + starred repos
-export function* watchLoadUserPage() {
+export function* watchGetLoggedUser() {
   /* eslint-disable no-constant-condition */
   while (true) {
   /* eslint-enable no-constant-condition */
-    const {login, requiredFields = []} = yield take(LOAD_USER_PAGE);
+    yield take(LOAD_LOGGED_USER);
 
-    yield fork(loadUser, login, requiredFields);
-    yield fork(loadStarred, login);
+    yield fork(loadUser);
   }
 }

@@ -54,16 +54,6 @@ function validation(values) {
   return errors;
 }
 
-
-// export default connect(() => {
-//   return {};
-// }, {
-//   submitLogin,
-// })(reactForm({
-//   fields: ['email', 'password'],
-//   validation,
-// })(LoginForm));
-
 export default reactForm({
   fields: ['email', 'password'],
   validation,

@@ -19,15 +19,15 @@ export default (options, mapStateToProps, mapDispatchToProps) => {
       isValid = true;
 
       componentWillMount() {
-        console.log('this.props.initialValues', this.props.initialValues);
         // const initialValues = {email: 'user@example.com', password: '12345678'};
         const initialValues = (this.props && _.isPlainObject(this.props.initialValues)) ? this.props.initialValues : {};
         const fields = _(this.fields).zipObject().mapValues((value, fieldName) => {
           const objectField = {
             name: fieldName,
             value: initialValues[fieldName] || '',
-            onChange: (event, newValue) => {
-              objectField.value = newValue;
+            onChange: (event/* , newValue */) => {
+              // objectField.value = newValue;
+              objectField.value = event.target.value;
               this.validate();
             },
             onBlur: () => {

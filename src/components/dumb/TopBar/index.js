@@ -10,10 +10,10 @@ export default function TopBar({authenticated}) {
   if (authenticated) {
     items = (
       <div className={styles.items}>
-        <Link to="dashboard" className={styles.item} activeClassName={styles.active}>
+        <Link to="/dashboard" className={styles.item} activeClassName={styles.active}>
           <MenuItem primaryText="Dashboard" />
         </Link>
-        <Link to="stats" className={styles.item} activeClassName={styles.active}>
+        <Link to="/stats" className={styles.item} activeClassName={styles.active}>
           <MenuItem primaryText="Statistics" />
         </Link>
       </div>
@@ -21,10 +21,10 @@ export default function TopBar({authenticated}) {
   } else {
     items = (
       <div className={styles.items}>
-        <Link to="login" className={styles.item} activeClassName={styles.active}>
+        <Link to="/login" className={styles.item} activeClassName={styles.active}>
           <MenuItem primaryText="Login" />
         </Link>
-        <Link to="register" className={styles.item} activeClassName={styles.active}>
+        <Link to="/register" className={styles.item} activeClassName={styles.active}>
           <MenuItem primaryText="Register" />
         </Link>
       </div>

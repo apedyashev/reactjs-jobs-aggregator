@@ -2,12 +2,10 @@
 // libs
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
-import _ from 'lodash';
 // actions
 import {loadDashboardPage} from 'actions/Dashboard';
 // components
 import SubscriptionList from 'components/smart/SubscriptionList';
-import JobItem from 'components/dumb/JobItem';
 import styles from './index.css';
 
 
@@ -21,27 +19,21 @@ class DashboardPage extends React.Component {
   }
 
   render() {
-    const {subscriptions, jobs} = this.props;
+    const {subscriptions, children} = this.props;
     return (<div className={styles.container}>
       <div className={styles.subscriptions}>
         <SubscriptionList subscriptions={subscriptions} />
-
       </div>
-      <div className={styles.jobsList}>
-        {_.map(jobs, (job) => {
-          return <JobItem key={job.id} data={job} />;
-        })}
+      <div className={styles.content}>
+        {children}
       </div>
-
     </div>);
   }
 }
 
-function select(state /* , ownProps */) {
+function select(state) {
   return {
-    user: state.entities.users || {},
     subscriptions: state.entities.subscriptions || {},
-    jobs: state.entities.jobs || {},
   };
 }
 

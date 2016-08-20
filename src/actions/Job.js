@@ -1,15 +1,20 @@
 import {createRequestTypes, action} from 'helpers/actions';
 
 export const actionTypes = createRequestTypes('JOBS');
+export const LOAD_JOBS_PAGE = 'LOAD_JOBS_PAGE';
 
 export const job = {
-  request: () => {
-    return action(actionTypes.REQUEST);
+  request: (subscriptionId) => {
+    return action(actionTypes.REQUEST, {subscriptionId});
   },
-  success: (id, response) => {
-    return action(actionTypes.SUCCESS, {response});
+  success: (subscriptionId, response) => {
+    return action(actionTypes.SUCCESS, {subscriptionId, response});
   },
-  failure: (id, error) => {
-    return action(actionTypes.FAILURE, {error});
+  failure: (subscriptionId, error) => {
+    return action(actionTypes.FAILURE, {subscriptionId, error});
   },
+};
+
+export const loadJobs = (subscriptionId) => {
+  return action(LOAD_JOBS_PAGE, {subscriptionId});
 };

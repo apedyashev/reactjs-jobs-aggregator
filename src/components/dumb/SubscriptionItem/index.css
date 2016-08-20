@@ -1,0 +1,9 @@
+.item {
+  .icons {
+    float: right;
+    display: none;
+  }
+  :hover .icons {
+    display: block;
+  }
+}

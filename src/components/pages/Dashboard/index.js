@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 // actions
 import {loadDashboardPage} from 'actions/Dashboard';
 // components
-import SubscriptionList from 'components/smart/SubscriptionList';
+import Sidebar from 'components/dumb/Sidebar';
 import styles from './index.css';
 
 
@@ -22,7 +22,7 @@ class DashboardPage extends React.Component {
     const {subscriptions, children} = this.props;
     return (<div className={styles.container}>
       <div className={styles.subscriptions}>
-        <SubscriptionList subscriptions={subscriptions} />
+        <Sidebar subscriptions={subscriptions} />
       </div>
       <div className={styles.content}>
         {children}

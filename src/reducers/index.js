@@ -9,7 +9,6 @@ function entities(state = {users: {}, repos: {}}, action) {
       ...action.response.entities,
     };
   }
-
   return state;
 }
 

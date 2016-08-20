@@ -3,6 +3,7 @@ import {watchGetLoggedUser} from './User';
 import {watchSubmitLoginForm} from './Login';
 import {watchLoadDashboardPage} from './Dashboard';
 import {watchLoadJobs} from './Job';
+import {watchSaveSubscription} from './Subscription';
 
 export default function* root() {
   yield [
@@ -10,5 +11,6 @@ export default function* root() {
     fork(watchSubmitLoginForm),
     fork(watchLoadDashboardPage),
     fork(watchLoadJobs),
+    fork(watchSaveSubscription),
   ];
 }

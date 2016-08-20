@@ -77,8 +77,8 @@ export default (options, mapStateToProps, mapDispatchToProps) => {
         this.submitFn = submitFn;
         return (e) => {
           this.validate();
+          e.preventDefault();
           if (!this.isValid) {
-            e.preventDefault();
             return false;
           }
 

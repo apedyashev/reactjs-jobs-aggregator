@@ -10,8 +10,8 @@ const API_ROOT = 'http://ja.rrs-lab.com/';
 export default function callApi(endpoint, schema, customOptions = {}) {
   let fullUrl = (endpoint.indexOf(API_ROOT) === -1) ? API_ROOT + endpoint : endpoint;
   const options = {
-    ...customOptions,
     method: 'GET',
+    ...customOptions,
   };
 
   const fetchOptions = {

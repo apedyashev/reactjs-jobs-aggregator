@@ -18,6 +18,7 @@ export default [
     <Route path="dashboard" component={Dashboard}>
       <IndexRoute component={JobsPage} />
       <Route path="subscription/:id/edit" component={SubscriptionEditPage} />
+      <Route path="subscription/new" component={SubscriptionEditPage} />
       <Route path="subscription/:id" component={JobsPage} />
     </Route>
     <Route path="404" component={NotFoundView} />

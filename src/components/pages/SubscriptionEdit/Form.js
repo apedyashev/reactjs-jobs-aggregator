@@ -5,6 +5,7 @@ import React, {PropTypes} from 'react';
 import {saveSubscription} from 'actions/Subscription';
 // components
 import {Input, Button} from 'components/dumb/Base';
+import Keywords from 'components/dumb/Keywords';
 import reactForm from 'components/smart/Form';
 
 class SubscriptionEditForm extends React.Component {
@@ -28,6 +29,9 @@ class SubscriptionEditForm extends React.Component {
           errorText={title.error}
           {...title}
         />
+        <div>
+          <Keywords {...keywords} />
+        </div>
         <div>
           <Button type="submit" label="Save" />
         </div>

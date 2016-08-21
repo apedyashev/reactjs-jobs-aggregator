@@ -7,7 +7,7 @@ export const actionTypes = {
   createSubscription: createRequestTypes('CREATE_SUBSCRIPTION'),
 };
 export const SAVE_SUBSCRIPTION = 'SAVE_SUBSCRIPTION';
-// export const LOAD_EDIT_SUBSCRIPTION_PAGE = 'LOAD_EDIT_SUBSCRIPTION_PAGE';
+export const LOAD_EDIT_SUBSCRIPTION_PAGE = 'LOAD_EDIT_SUBSCRIPTION_PAGE';
 
 export const actionCreators = {
   subscriptions: {
@@ -43,9 +43,9 @@ export const actionCreators = {
   },
 };
 
-// export const loadSubscriptionPage = (id) => {
-//   return action(LOAD_EDIT_SUBSCRIPTION_PAGE, {id});
-// };
+export const loadSubscriptionPage = (id) => {
+  return action(LOAD_EDIT_SUBSCRIPTION_PAGE, {id});
+};
 
 export function saveSubscription(id, data) {
   return action(SAVE_SUBSCRIPTION, {id, data});

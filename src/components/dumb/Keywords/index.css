@@ -1,9 +1,11 @@
-.tag {
-  display: inline !important;
-}
+.wrapper {
+  .tag {
+    display: inline !important;
+  }
 
-input {
-  border: 0;
-  border-bottom: 1px solid grey;
-  width: 100%;
+  input {
+    border: 0;
+    border-bottom: 1px solid grey;
+    width: 100%;
+  }
 }

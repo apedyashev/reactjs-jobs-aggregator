@@ -19,7 +19,7 @@ class Keywords extends React.Component {
   }
 
   render() {
-    return (<div>
+    return (<div className={styles.wrapper}>
       <TagsInput
         renderTag={this.renderTag}
         onChange={this.handleChange}

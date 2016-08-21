@@ -25,9 +25,9 @@ export default (options, mapStateToProps, mapDispatchToProps) => {
           const objectField = {
             name: fieldName,
             value: initialValues[fieldName] || '',
-            onChange: (event/* , newValue */) => {
+            onChange: (event, newValue) => {
               // objectField.value = newValue;
-              objectField.value = event.target.value;
+              objectField.value = (newValue !== undefined) ? newValue : event.target.value;
               this.validate();
             },
             onBlur: () => {

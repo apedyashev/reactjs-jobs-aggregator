@@ -1,8 +1,9 @@
 import {call, take, fork} from 'redux-saga/effects';
-import {actionCreators, SAVE_SUBSCRIPTION} from 'actions/Subscription';
+import {actionCreators, SAVE_SUBSCRIPTION, LOAD_EDIT_SUBSCRIPTION_PAGE} from 'actions/Subscription';
 import {Schema, arrayOf} from 'normalizr';
 import callApi from 'services/api';
 import {fetchEntity} from 'helpers/sagas';
+import {loadCities} from './City';
 
 const schemas = {
   subscription: new Schema('subscriptions'),
@@ -41,12 +42,12 @@ export function* watchSaveSubscription() {
   }
 }
 
-// export function* watchLoadEditSubscriptiondPage() {
-//   /* eslint-disable no-constant-condition */
-//   while (true) {
-//   /* eslint-enable no-constant-condition */
-//     const {id} = yield take(LOAD_EDIT_SUBSCRIPTION_PAGE);
-//
-//     yield fork(loadSubscription, id);
-//   }
-// }
+export function* watchLoadEditSubscriptiondPage() {
+  /* eslint-disable no-constant-condition */
+  while (true) {
+  /* eslint-enable no-constant-condition */
+    yield take(LOAD_EDIT_SUBSCRIPTION_PAGE);
+
+    yield fork(loadCities);
+  }
+}

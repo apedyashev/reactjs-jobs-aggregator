@@ -6,6 +6,7 @@ import {saveSubscription} from 'actions/Subscription';
 // components
 import {Input, Button} from 'components/dumb/Base';
 import Keywords from 'components/dumb/Keywords';
+import CitiesList from 'components/dumb/CitiesList';
 import reactForm from 'components/smart/Form';
 
 class SubscriptionEditForm extends React.Component {
@@ -19,7 +20,7 @@ class SubscriptionEditForm extends React.Component {
   }
 
   render() {
-    const {fields: {title, keywords, cities}, handleSubmit} = this.props;
+    const {fields: {title, keywords, cities}, handleSubmit, allCities} = this.props;
     console.log('------------title', title, keywords, cities);
     return (
       <form ref={this.props.formRef} onSubmit={handleSubmit(this.submitForm)}>
@@ -31,6 +32,9 @@ class SubscriptionEditForm extends React.Component {
         />
         <div>
           <Keywords {...keywords} />
+        </div>
+        <div>
+          <CitiesList items={allCities} {...cities} />
         </div>
         <div>
           <Button type="submit" label="Save" />
@@ -56,6 +60,7 @@ export default reactForm({
   console.log('***', state, ownProps);
   return {
     initialValues: ownProps.subscription,
+    allCities: state.entities.cities,
   };
 }, {
   saveSubscription,

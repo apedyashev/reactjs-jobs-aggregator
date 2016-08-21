@@ -2,10 +2,15 @@
 import React from 'react';
 import {connect} from 'react-redux';
 // actions
+import {loadSubscriptionPage} from 'actions/Subscription';
 // components
 import EditForm from './Form';
 
 class SubscriptionEdit extends React.Component {
+  componentWillMount() {
+    this.props.loadSubscriptionPage();
+  }
+
   render() {
     return (<div>
       <EditForm key={this.props.subscription.id} subscription={this.props.subscription} />
@@ -24,4 +29,5 @@ function select(state, ownProps) {
 }
 
 export default connect(select, {
+  loadSubscriptionPage,
 })(SubscriptionEdit);

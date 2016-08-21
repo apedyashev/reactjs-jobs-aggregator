@@ -7,6 +7,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import muiTheme from 'components/MuiTheme';
 
+
 test('JobItem', (t) => {
   const jobData = {};
   const wrapper = shallow(<JobItem data={jobData} />);
@@ -23,7 +24,7 @@ test('JobItem', (t) => {
       <JobItem data={jobData} />
     </MuiThemeProvider>
   );
-  console.log(wrapper.find(CardHeader).text());
+
   t.is(wrapper.find(CardHeader).find('.title').text(), 'No Title', 'renders default title in CardHeader');
   t.is(wrapper.find(CardHeader).find('.subtitle').text(), 'No Date | No Company', 'renders default subtitle CardHeader');
   t.is(wrapper.find(CardText).text(), '', 'renders nothing in CardText');

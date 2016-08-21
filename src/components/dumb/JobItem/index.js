@@ -1,8 +1,8 @@
 // libs
-import React from 'react';
+import React, {PropTypes} from 'react';
 import {Card, CardHeader, CardText} from 'material-ui/Card';
 
-export default function JobItem({data}) {
+export default function JobItem({data = {}}) {
   const defaults = {
     jobTitle: 'No Title',
     date: 'No Date',
@@ -20,3 +20,7 @@ export default function JobItem({data}) {
     </CardText>
   </Card>);
 }
+
+JobItem.propTypes = {
+  data: PropTypes.object.isRequired,
+};

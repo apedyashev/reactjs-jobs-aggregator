@@ -2,13 +2,13 @@ import test from 'ava';
 import {/* shallow, */mount} from 'enzyme';
 import React from 'react';
 import configureStore from 'redux-mock-store';
-import jsdom from 'jsdom';
+// import jsdom from 'jsdom';
 import _ from 'lodash';
 import reduxFormHoc from './index.js';
 
-const doc = jsdom.jsdom('<!doctype html><html><body></body></html>');
-global.document = doc;
-global.window = doc.defaultView;
+// const doc = jsdom.jsdom('<!doctype html><html><body></body></html>');
+// global.document = doc;
+// global.window = doc.defaultView;
 
 const mockStore = configureStore();
 

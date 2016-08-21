@@ -113,7 +113,8 @@
       "src/**/*.spec.js"
     ],
     "require": [
-      "babel-register"
+      "babel-register",
+      "./src/helpers/test.js"
     ],
     "babel": "inherit"
   }

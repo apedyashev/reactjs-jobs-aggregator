@@ -89,7 +89,7 @@ export default (options, mapStateToProps, mapDispatchToProps) => {
       }
 
       render() {
-        console.log('lib form render');
+        // console.log('lib form render');
         return (<Form
           {...this.props}
           fields={this.state.fields}

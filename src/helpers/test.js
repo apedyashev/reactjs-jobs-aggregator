@@ -19,17 +19,18 @@ if (!initTestEnv.initialized) {
 
 export const reactWarnings = {
   watchConsole() {
-    this.spy = sinon.spy(console, 'error');
+    this.stub = sinon.stub(console, 'error');
   },
   propWarnings() {
     const propWarnings = [];
-    for (let i = 0; i < this.spy.callCount; i++) {
-      const spyCall = this.spy.getCall(i);
-      if (/(Invalid prop|Failed prop)/.test(spyCall.args[0])) {
-        propWarnings.push(spyCall.args[0]);
+    for (let i = 0; i < this.stub.callCount; i++) {
+      const stubCall = this.stub.getCall(i);
+      if (/(Invalid prop|Failed prop)/.test(stubCall.args[0])) {
+        propWarnings.push(stubCall.args[0]);
       }
     }
-    console.error.restore();
+    // console.error.restore();
+    this.stub.restore();
 
     return propWarnings;
   },

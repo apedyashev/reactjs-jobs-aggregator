@@ -3,7 +3,7 @@ import React, {PropTypes} from 'react';
 // components
 import Checkbox from 'material-ui/Checkbox';
 
-export default function CityItem({id, name, defaultChecked, onCheck}) {
+export default function CityItem({id, name, defaultChecked = false, onCheck}) {
   const handleCheck = (event, isChecked) => {
     onCheck(id, event, isChecked);
   };
@@ -16,5 +16,10 @@ export default function CityItem({id, name, defaultChecked, onCheck}) {
 }
 
 CityItem.propTypes = {
+  id: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+  ]).isRequired,
   name: PropTypes.string.isRequired,
+  onCheck: PropTypes.func.isRequired,
 };

@@ -1,3 +1,4 @@
+// TODO: smart or dumb?
 // libs
 import React, {PropTypes} from 'react';
 import _ from 'lodash';
@@ -15,12 +16,16 @@ class CitiesList extends React.Component {
 
   state = {
     searchText: '',
+    sortedItems: [],
     items: [],
   };
 
   componentWillReceiveProps(newProps) {
+    const sortedItems = _.sortBy(newProps.items, 'name');
     this.setState({
-      items: _.sortBy(newProps.items, 'name'),
+      // sorted items won't be changed, but items can be filtered using searchText
+      sortedItems,
+      items: sortedItems,
     });
   }
 
@@ -37,13 +42,30 @@ class CitiesList extends React.Component {
     this.props.onChange(null, value);
   }
 
+  handleSearchChange = (event) => {
+    const searchText = event.target.value;
+    const {sortedItems} = this.state;
+    if (searchText) {
+      this.setState({
+        items: _.filter(sortedItems, (item) => {
+          return item.name.match(new RegExp(searchText, 'i'));
+        }),
+      });
+    } else {
+      // display all cities
+      this.setState({
+        items: sortedItems,
+      });
+    }
+  }
+
   render() {
     const {value} = this.props;
     const {items} = this.state;
     return (<Card>
       <CardHeader>
         Select cities
-        <input />
+        <input onChange={this.handleSearchChange} />
       </CardHeader>
       <CardText expandable={false}>
         {!items.length ? 'Loading...' : null}

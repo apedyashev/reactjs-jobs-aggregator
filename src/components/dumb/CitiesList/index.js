@@ -5,6 +5,7 @@ import _ from 'lodash';
 // actions
 // components
 import {Card, CardHeader, CardText} from 'material-ui/Card';
+import Loader from 'components/dumb/Loader';
 import CityItem from 'components/dumb/CityItem';
 import Infinite from 'react-infinite';
 
@@ -21,8 +22,16 @@ class CitiesList extends React.Component {
     items: [],
   };
 
+  componentWillMount() {
+    this.updateItems(this.props);
+  }
+
   componentWillReceiveProps(newProps) {
-    const sortedItems = _.sortBy(newProps.items, 'name');
+    this.updateItems(newProps);
+  }
+
+  updateItems(props) {
+    const sortedItems = _.sortBy(props.items, 'name');
     this.setState({
       // sorted items won't be changed, but items can be filtered using searchText
       sortedItems,
@@ -69,12 +78,13 @@ class CitiesList extends React.Component {
         <input onChange={this.handleSearchChange} />
       </CardHeader>
       <CardText expandable={false}>
-        {isLoading ? 'Loading...' : null}
+        {isLoading ? (<Loader />) : null}
         <Infinite
           elementHeight={24}
           containerHeight={250}
           infiniteLoadBeginEdgeOffset={11}
         >
+          {console.log('items', items)}
           {_.map(items, (city, i) => {
             return (<CityItem
               key={i}

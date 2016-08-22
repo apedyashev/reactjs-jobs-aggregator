@@ -22,7 +22,6 @@
   "bugs": "https://github.com/nicksp/redux-webpack-es6-boilerplate/issues",
   "scripts": {
     "precommit": "npm test",
-    "prepush": "npm test",
     "pretest": "eslint ./src --ext .js",
     "clean:build": "node ./bin/clean.js createdir",
     "build:html": "node ./bin/buildHtml.js",

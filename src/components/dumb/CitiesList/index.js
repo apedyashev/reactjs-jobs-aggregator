@@ -12,6 +12,7 @@ class CitiesList extends React.Component {
   static propTypes = {
     value: PropTypes.array.isRequired,
     onChange: PropTypes.func.isRequired,
+    isLoading: PropTypes.bool.isRequired,
   };
 
   state = {
@@ -60,7 +61,7 @@ class CitiesList extends React.Component {
   }
 
   render() {
-    const {value} = this.props;
+    const {value, isLoading} = this.props;
     const {items} = this.state;
     return (<Card>
       <CardHeader>
@@ -68,7 +69,7 @@ class CitiesList extends React.Component {
         <input onChange={this.handleSearchChange} />
       </CardHeader>
       <CardText expandable={false}>
-        {!items.length ? 'Loading...' : null}
+        {isLoading ? 'Loading...' : null}
         <Infinite
           elementHeight={24}
           containerHeight={250}

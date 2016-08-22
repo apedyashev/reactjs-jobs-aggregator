@@ -20,8 +20,8 @@ class SubscriptionEditForm extends React.Component {
   }
 
   render() {
-    const {fields: {title, keywords, cities}, handleSubmit, allCities} = this.props;
-    console.log('------------title', title, keywords, cities);
+    const {fields: {title, keywords, cities}, handleSubmit, allCities, requests} = this.props;
+    console.log('------------requests', requests);
     return (
       <form ref={this.props.formRef} onSubmit={handleSubmit(this.submitForm)}>
         <Input
@@ -34,7 +34,7 @@ class SubscriptionEditForm extends React.Component {
           <Keywords {...keywords} />
         </div>
         <div>
-          <CitiesList items={allCities} {...cities} />
+          <CitiesList items={allCities} {...cities} isLoading={requests.cities.isLoading} />
         </div>
         <div>
           <Button type="submit" label="Save" />
@@ -61,6 +61,7 @@ export default reactForm({
   return {
     initialValues: ownProps.subscription,
     allCities: state.entities.cities,
+    requests: state.requests,
   };
 }, {
   saveSubscription,

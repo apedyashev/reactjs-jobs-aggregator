@@ -22,6 +22,12 @@ class CitiesList extends React.Component {
     items: [],
   };
 
+  infiniteConfig = {
+    elementHeight: 24,
+    containerHeight: 250,
+    infiniteLoadBeginEdgeOffset: 11,
+  };
+
   componentWillMount() {
     this.updateItems(this.props);
   }
@@ -79,12 +85,7 @@ class CitiesList extends React.Component {
       </CardHeader>
       <CardText expandable={false}>
         {isLoading ? (<Loader />) : null}
-        <Infinite
-          elementHeight={24}
-          containerHeight={250}
-          infiniteLoadBeginEdgeOffset={11}
-        >
-          {console.log('items', items)}
+        <Infinite {...this.infiniteConfig}>
           {_.map(items, (city, i) => {
             return (<CityItem
               key={i}

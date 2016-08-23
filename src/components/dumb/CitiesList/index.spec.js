@@ -1,19 +1,22 @@
 import test from 'ava';
 import React from 'react';
 import {shallow, mount} from 'enzyme';
+import _ from 'lodash';
 // import sinon from 'sinon';
 import {reactWarnings} from 'helpers/test';
 import {Card, CardHeader, CardText} from 'material-ui/Card';
 import Loader from 'components/dumb/Loader';
 import Infinite from 'react-infinite';
+import CityItem from 'components/dumb/CityItem';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import muiTheme from 'components/MuiTheme';
-import CityItem from './index.js';
+import CitiesList from './index.js';
+
 
 test('CitiesList', (t) => {
   reactWarnings.watchConsole();
-  const wrapper = shallow(<CityItem />);
+  const wrapper = shallow(<CitiesList />);
 
   t.is(wrapper.type(), Card, 'renders Card as root element');
   t.regex(reactWarnings.propWarnings()[0], /Failed prop type: Required prop `value` was not specified/,
@@ -24,6 +27,7 @@ test('CitiesList', (t) => {
     'defines prop types validation for the isLoading property');
 });
 
+
 test('CitiesList', (t) => {
   const props = {
     value: ['city1', 'city3'],
@@ -33,7 +37,7 @@ test('CitiesList', (t) => {
   };
   const wrapper = mount(
     <MuiThemeProvider muiTheme={getMuiTheme(muiTheme)}>
-      <CityItem {...props} />
+      <CitiesList {...props} />
     </MuiThemeProvider>
   );
 
@@ -44,6 +48,7 @@ test('CitiesList', (t) => {
   t.is(wrapper.find(CardText).text(), '', 'has no content inside of CardText');
 });
 
+
 test('CitiesList', (t) => {
   const props = {
     value: ['city1', 'city3'],
@@ -53,10 +58,20 @@ test('CitiesList', (t) => {
   };
   const wrapper = mount(
     <MuiThemeProvider muiTheme={getMuiTheme(muiTheme)}>
-      <CityItem {...props} />
+      <CitiesList {...props} />
     </MuiThemeProvider>
   );
 
   t.is(wrapper.find(CardText).find(Loader).length, 1, 'renders Loader');
-  // t.is(wrapper.find(CityItem).length, props.items.length, 'has no content inside of CardText');
+  t.is(wrapper.find(Infinite).find(CityItem).length, props.items.length, 'renders CityItem elements');
+
+  // check that cities from props.value are checked
+  const itemsWrapper = wrapper.find(Infinite).find(CityItem);
+  _.forEach(props.items, (city) => {
+    const currentCity = itemsWrapper.filterWhere((n) => {
+      return n.props().name === city.name;
+    });
+    const shouldBeChecked = props.value.indexOf(city.name) >= 0;
+    t.is(currentCity.props().defaultChecked, shouldBeChecked, ' CityItems have correct `defaultChecked` prop');
+  });
 });

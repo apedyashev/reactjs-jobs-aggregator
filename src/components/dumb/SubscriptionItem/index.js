@@ -8,11 +8,11 @@ import styles from './index.css';
 
 export default function SubscriptionItem({data}) {
   return (<ListItem className={styles.item}>
-    <Link to={`/dashboard/subscription/${data.id}`}>
+    <Link to={`/dashboard/subscription/${data.id}`} activeClassName={styles.active} className={styles.label}>
       {data.title}
     </Link>
     <div className={styles.icons}>
-      <Link to={`/dashboard/subscription/${data.id}/edit`}><EditIcon /></Link>
+      <Link to={`/dashboard/subscription/${data.id}/edit`} activeClassName={styles.active}><EditIcon /></Link>
       <DeleteIcon />
     </div>
   </ListItem>);

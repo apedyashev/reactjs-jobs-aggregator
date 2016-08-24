@@ -26,7 +26,7 @@ class DashboardPage extends React.Component {
   render() {
     const {jobs} = this.props;
     return (<div>
-      <JobList jobs={jobs} />
+      <JobList jobs={jobs} isLoading={this.props.requests.isLoading} />
     </div>);
   }
 }
@@ -35,6 +35,7 @@ function select(state, ownProps) {
   return {
     subscriptionId: ownProps.params.id,
     jobs: state.entities.jobs || {},
+    requests: state.requests,
   };
 }
 

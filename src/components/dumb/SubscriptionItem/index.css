@@ -16,10 +16,12 @@
     display: block;
     position: relative;
     padding: 16px;
+    
+    .active {
+      border-left: 3px solid red;
+    }
   }
-  .active {
-    border-left: 3px solid red;
-  }
+
   .icons {
     float: right;
     display: none;

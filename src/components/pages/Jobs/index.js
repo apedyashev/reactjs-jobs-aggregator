@@ -2,6 +2,7 @@
 // libs
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
+import _ from 'lodash';
 // actions
 import {loadJobs} from 'actions/Job';
 // components
@@ -32,9 +33,18 @@ class DashboardPage extends React.Component {
 }
 
 function select(state, ownProps) {
+  const subscriptionId = ownProps.params.id;
+  const {jobs, subscriptionJobs} = state.entities;
+  let selectedJobs = jobs || {};
+  if (subscriptionId && subscriptionJobs) {
+    const jobIds = state.entities.subscriptionJobs[subscriptionId] || {};
+    selectedJobs = _.map(jobIds, (jobId) => {
+      return jobs[jobId];
+    });
+  }
   return {
-    subscriptionId: ownProps.params.id,
-    jobs: state.entities.jobs || {},
+    subscriptionId,
+    jobs: selectedJobs,
     requests: state.requests,
   };
 }

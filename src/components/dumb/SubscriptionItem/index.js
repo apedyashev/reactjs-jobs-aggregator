@@ -10,18 +10,25 @@ import styles from './index.css';
 class SubscriptionItem extends React.Component {
   static propTypes = {
     data: PropTypes.object.isRequired,
+    onRemoveRequesChanged: PropTypes.func,
   };
 
   state = {
     removeRequested: false,
   };
 
+  componentWillReceiveProps(newProps) {
+    this.setState({removeRequested: newProps.removeRequested});
+  }
+
   handleRemoveIconClicked = () => {
     this.setState({removeRequested: true});
+    this.props.onRemoveRequesChanged(this.props.data.id, true);
   }
 
   handleRemovingCancel = () => {
     this.setState({removeRequested: false});
+    this.props.onRemoveRequesChanged(this.props.data.id, false);
   }
 
   render() {

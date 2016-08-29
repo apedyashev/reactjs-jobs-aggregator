@@ -1,20 +1,39 @@
 // libs
 import React, {PropTypes} from 'react';
-// import {connect} from 'react-redux';
 import _ from 'lodash';
 // actions
 // components
 import SubscriptionItem from 'components/dumb/SubscriptionItem';
 import {List} from 'material-ui/List';
 
-export default function SubscriptionList({subscriptions}) {
-  return (<List>
-    {_.map(subscriptions, (subscription) => {
-      return <SubscriptionItem key={subscription.id} data={subscription} />;
-    })}
-  </List>);
+
+class SubscriptionList extends React.Component {
+  static propTypes = {
+    subscriptions: PropTypes.object.isRequired,
+  };
+
+  state = {itemToBeRemovedId: false};
+
+  handleItemRemoveRequest = (itemId, remove) => {
+    const itemToBeRemovedId = remove ? itemId : null;
+    this.setState({itemToBeRemovedId});
+  }
+
+  render() {
+    const {subscriptions} = this.props;
+    const {itemToBeRemovedId} = this.state;
+
+    return (<List>
+      {_.map(subscriptions, (subscription) => {
+        return (<SubscriptionItem
+          key={subscription.id}
+          data={subscription}
+          removeRequested={itemToBeRemovedId === subscription.id}
+          onRemoveRequesChanged={this.handleItemRemoveRequest}
+        />);
+      })}
+    </List>);
+  }
 }
 
-SubscriptionList.propTypes = {
-  subscriptions: PropTypes.object.isRequired,
-};
+export default SubscriptionList;

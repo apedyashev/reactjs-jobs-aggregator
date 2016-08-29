@@ -16,8 +16,8 @@
     display: block;
     position: relative;
     padding: 16px;
-    
-    .active {
+
+    &.active {
       border-left: 3px solid red;
     }
   }

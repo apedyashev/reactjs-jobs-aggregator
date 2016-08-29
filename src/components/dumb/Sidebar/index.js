@@ -7,9 +7,10 @@ import SubscriptionList from 'components/dumb/SubscriptionList';
 import {ListItem} from 'material-ui/List';
 import styles from './index.css';
 
-export default function Sidebar({subscriptions, removeSubscription}) {
+export default function Sidebar({subscriptions, removeSubscription, subscriptionsRequest}) {
   Sidebar.propTypes = {
     subscriptions: PropTypes.object.isRequired,
+    subscriptionsRequest: PropTypes.object.isRequired,
     removeSubscription: PropTypes.func.isRequired,
   };
 
@@ -23,6 +24,7 @@ export default function Sidebar({subscriptions, removeSubscription}) {
 
     <SubscriptionList
       subscriptions={subscriptions}
+      request={subscriptionsRequest}
       removeSubscription={removeSubscription}
     />
   </div>);

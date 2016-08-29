@@ -13,6 +13,7 @@ import styles from './index.css';
 class DashboardPage extends React.Component {
   static propTypes = {
     subscriptions: PropTypes.object.isRequired,
+    subscriptionsRequest: PropTypes.object.isRequired,
     children: PropTypes.node,
     loadDashboardPage: PropTypes.func.isRequired,
     removeSubscription: PropTypes.func.isRequired,
@@ -26,7 +27,11 @@ class DashboardPage extends React.Component {
     const {subscriptions, children} = this.props;
     return (<div className={styles.container}>
       <div className={styles.subscriptions}>
-        <Sidebar subscriptions={subscriptions} removeSubscription={this.props.removeSubscription} />
+        <Sidebar
+          subscriptions={subscriptions}
+          removeSubscription={this.props.removeSubscription}
+          subscriptionsRequest={this.props.subscriptionsRequest}
+        />
       </div>
       <div className={styles.content}>
         {children}
@@ -38,6 +43,7 @@ class DashboardPage extends React.Component {
 function select(state) {
   return {
     subscriptions: state.entities.subscriptions || {},
+    subscriptionsRequest: state.requests.subscriptions,
   };
 }
 

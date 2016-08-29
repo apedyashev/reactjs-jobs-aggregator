@@ -20,9 +20,9 @@ export const actionCreators = {
     failure: (id, error) => action(actionTypes.fetch.FAILURE, {error}),
   },
   remove: {
-    request: () => action(actionTypes.remove.REQUEST),
-    success: (id, response) => action(actionTypes.remove.SUCCESS, {response}),
-    failure: (id, error) => action(actionTypes.remove.FAILURE, {error}),
+    request: ({id}) => action(actionTypes.remove.REQUEST, {id}),
+    success: ({id}, response) => action(actionTypes.remove.SUCCESS, {id, response}),
+    failure: ({id}, error) => action(actionTypes.remove.FAILURE, {id, error}),
   },
   save: {
     request: (id, data) => {

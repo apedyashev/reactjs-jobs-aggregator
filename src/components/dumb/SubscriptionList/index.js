@@ -10,6 +10,7 @@ import {List} from 'material-ui/List';
 class SubscriptionList extends React.Component {
   static propTypes = {
     subscriptions: PropTypes.object.isRequired,
+    request: PropTypes.object.isRequired,
     removeSubscription: PropTypes.func.isRequired,
   };
 
@@ -21,18 +22,18 @@ class SubscriptionList extends React.Component {
   }
 
   render() {
-    const {subscriptions} = this.props;
+    const {subscriptions, request: {removingId}} = this.props;
     const {itemToBeRemovedId} = this.state;
 
     return (<List>
       {_.map(subscriptions, (subscription) => {
-        return (<SubscriptionItem
+        return (removingId !== subscription.id) ? (<SubscriptionItem
           key={subscription.id}
           data={subscription}
           removeRequested={itemToBeRemovedId === subscription.id}
           onRemoveRequesChanged={this.handleItemRemoveRequest}
           removeConfirmed={this.props.removeSubscription}
-        />);
+        />) : null;
       })}
     </List>);
   }

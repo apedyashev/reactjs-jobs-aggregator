@@ -53,7 +53,7 @@ export default function callApi(endpoint, schema, customOptions = {}) {
         console.error('callApi error', error);
         return {
           statusCode: error.statusCode,
-          error: error.json.message || 'Something bad happened',
+          error: (error.json && error.json.message) || 'Something bad happened',
         };
       }
     );

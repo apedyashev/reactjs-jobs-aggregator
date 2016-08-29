@@ -1,5 +1,5 @@
 // libs
-import React from 'react';
+import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {push} from 'react-router-redux';
 // actions
@@ -9,6 +9,10 @@ import LoginForm from './Form';
 import styles from './index.css';
 
 class LoginPage extends React.Component {
+  static propTypes = {
+    push: PropTypes.func.isRequired,
+  };
+
   componentWillReceiveProps(newProps) {
     this.redirectIfLogged(newProps);
   }

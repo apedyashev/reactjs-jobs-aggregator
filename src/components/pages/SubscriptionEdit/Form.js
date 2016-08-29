@@ -1,6 +1,5 @@
 // libs
 import React, {PropTypes} from 'react';
-// import {connect} from 'react-redux';
 // actions
 import {saveSubscription} from 'actions/Subscription';
 // components
@@ -12,6 +11,12 @@ import reactForm from 'components/smart/Form';
 class SubscriptionEditForm extends React.Component {
   static propTypes = {
     initialValues: PropTypes.object.isRequired,
+    fields: PropTypes.object.isRequired,
+    allCities: PropTypes.object,
+    requests: PropTypes.object.isRequired,
+    formRef: PropTypes.object.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+    saveSubscription: PropTypes.func.isRequired,
   };
 
   submitForm = (values) => {

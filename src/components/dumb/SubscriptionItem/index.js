@@ -1,5 +1,5 @@
 // libs
-import React from 'react';
+import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 import {ListItem} from 'material-ui/List';
 import DeleteIcon from 'react-icons/lib/md/delete';
@@ -17,3 +17,7 @@ export default function SubscriptionItem({data}) {
     </div>
   </ListItem>);
 }
+
+SubscriptionItem.propTypes = {
+  data: PropTypes.object.isRequired,
+};

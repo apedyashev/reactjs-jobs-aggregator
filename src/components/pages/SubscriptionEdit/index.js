@@ -1,5 +1,5 @@
 // libs
-import React from 'react';
+import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 // actions
 import {loadSubscriptionPage} from 'actions/Subscription';
@@ -7,6 +7,11 @@ import {loadSubscriptionPage} from 'actions/Subscription';
 import EditForm from './Form';
 
 class SubscriptionEdit extends React.Component {
+  static propTypes = {
+    subscription: PropTypes.object.isRequired,
+    loadSubscriptionPage: PropTypes.func.isRequired,
+  };
+
   componentWillMount() {
     this.props.loadSubscriptionPage();
   }

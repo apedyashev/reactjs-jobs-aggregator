@@ -1,5 +1,5 @@
 // libs
-import React from 'react';
+import React, {PropTypes} from 'react';
 // components
 import {Link} from 'react-router';
 import MenuItem from 'material-ui/MenuItem';
@@ -33,3 +33,7 @@ export default function TopBar({authenticated}) {
 
   return <div className={styles.container}>{items}</div>;
 }
+
+TopBar.propTypes = {
+  authenticated: PropTypes.bool,
+};

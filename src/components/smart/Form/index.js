@@ -1,5 +1,5 @@
 // libs
-import React from 'react';
+import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import _ from 'lodash';
 // actions
@@ -14,6 +14,9 @@ export default (options, mapStateToProps, mapDispatchToProps) => {
     // const ConnectedForm = connect(mapStateToProps, mapDispatchToProps)(Form);
 
     class ReduxForm extends React.Component {
+      static propTypes = {
+        initialValues: PropTypes.object,
+      }
       state = {};
       fields = options.fields;
       isValid = true;

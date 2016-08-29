@@ -21,5 +21,6 @@ CityItem.propTypes = {
     PropTypes.string,
   ]).isRequired,
   name: PropTypes.string.isRequired,
+  defaultChecked: PropTypes.bool.isRequired,
   onCheck: PropTypes.func.isRequired,
 };

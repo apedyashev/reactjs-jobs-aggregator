@@ -17,6 +17,8 @@ require('./normalizes-overwrites.css');
 class App extends Component {
   static propTypes = {
     children: PropTypes.element.isRequired,
+    loadLoggedUser: PropTypes.func.isRequired,
+    push: PropTypes.func.isRequired,
   };
 
   componentWillMount() {

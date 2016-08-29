@@ -1,5 +1,5 @@
 // libs
-import React from 'react';
+import React, {PropTypes} from 'react';
 // actions
 // components
 import TagsInput from 'react-tagsinput';
@@ -8,6 +8,11 @@ import Chip from 'material-ui/Chip';
 import styles from './index.css';
 
 class Keywords extends React.Component {
+  static propTypes = {
+    value: PropTypes.array.isRequired,
+    onChange: PropTypes.func.isRequired,
+  };
+
   renderTag(props) {
     return (<Chip key={props.key} className={styles.tag}>
       {props.tag}

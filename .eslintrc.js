@@ -41,7 +41,6 @@ module.exports = {
     "import/prefer-default-export": "off",
     "no-console": "off",
     "no-param-reassign": "off",
-    "react/prop-types": "off",
     "react/prefer-stateless-function": "warn",
     "react/no-string-refs": "off",
     "react/sort-comp": "off",

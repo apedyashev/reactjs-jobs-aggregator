@@ -2,50 +2,32 @@
 // libs
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
-import _ from 'lodash';
 // actions
 import {loadJobs} from 'actions/Job';
 // components
-import JobList from 'components/dumb/JobList';
+import JobList from 'components/smart/JobList';
 
 
 class DashboardPage extends React.Component {
   static propTypes = {
+    subscriptionId: PropTypes.oneOfType([
+      PropTypes.string, // it can be md5 hash for example
+      PropTypes.number,
+    ]).isRequired,
     loadJobs: PropTypes.func.isRequired,
   };
 
-  componentWillMount() {
-    this.props.loadJobs(this.props.subscriptionId);
-  }
-
-  componentWillReceiveProps(newProps) {
-    if (newProps.subscriptionId !== this.props.subscriptionId) {
-      this.props.loadJobs(newProps.subscriptionId);
-    }
-  }
-
   render() {
-    const {jobs} = this.props;
     return (<div>
-      <JobList jobs={jobs} isLoading={this.props.requests.isLoading} />
+      <JobList subscriptionId={this.props.subscriptionId} />
     </div>);
   }
 }
 
 function select(state, ownProps) {
   const subscriptionId = ownProps.params.id;
-  const {jobs, subscriptionJobs} = state.entities;
-  let selectedJobs = jobs || {};
-  if (subscriptionId && subscriptionJobs) {
-    const jobIds = state.entities.subscriptionJobs[subscriptionId] || {};
-    selectedJobs = _.map(jobIds, (jobId) => {
-      return jobs[jobId];
-    });
-  }
   return {
     subscriptionId,
-    jobs: selectedJobs,
-    requests: state.requests,
   };
 }
 

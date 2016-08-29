@@ -1,5 +1,5 @@
 // libs
-import React from 'react';
+import React, {PropTypes} from 'react';
 // import {connect} from 'react-redux';
 // actions
 import {submitLogin} from 'actions/Login';
@@ -8,6 +8,16 @@ import {Input} from 'components/dumb/Base';
 import reactForm from 'components/smart/Form';
 
 class LoginForm extends React.Component {
+  static propTypes = {
+    methods: PropTypes.func.isRequired,
+    formRef: PropTypes.object.isRequired,
+    // injected byt reactForm lib
+    fields: PropTypes.object.isRequired,
+    submit: PropTypes.func.isRequired,
+    submitLogin: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+  }
+
   componentDidMount() {
     this.props.methods({
       submit: this.props.submit,

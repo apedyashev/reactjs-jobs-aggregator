@@ -15,7 +15,9 @@ test('CityItem', (t) => {
     'defines prop types validation for the id property');
   t.regex(reactWarnings.propWarnings()[1], /Failed prop type: Required prop `name` was not specified/,
     'defines prop types validation for the name property');
-  t.regex(reactWarnings.propWarnings()[2], /Failed prop type: Required prop `onCheck` was not specified/,
+  t.regex(reactWarnings.propWarnings()[2], /Failed prop type: Required prop `defaultChecked` was not specified/,
+    'defines prop types validation for the defaultChecked property');
+  t.regex(reactWarnings.propWarnings()[3], /Failed prop type: Required prop `onCheck` was not specified/,
     'defines prop types validation for the onCheck property');
 });
 

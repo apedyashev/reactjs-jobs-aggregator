@@ -1,5 +1,5 @@
 // libs
-import React from 'react';
+import React, {PropTypes} from 'react';
 import styles from './index.css';
 
 export default function ListItem(props) {
@@ -9,3 +9,7 @@ export default function ListItem(props) {
     </div>
   );
 }
+
+ListItem.propTypes = {
+  children: PropTypes.node,
+};

@@ -11,6 +11,8 @@ import styles from './index.css';
 
 class DashboardPage extends React.Component {
   static propTypes = {
+    subscriptions: PropTypes.object.isRequired,
+    children: PropTypes.node,
     loadDashboardPage: PropTypes.func.isRequired,
   };
 

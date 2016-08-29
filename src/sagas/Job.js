@@ -9,20 +9,20 @@ const schemas = {
 };
 schemas.jobsArray = arrayOf(schemas.job);
 
-export const fetchJobs = fetchEntity.bind(null, job, (subscriptionId) => {
-  return callApi('/api/jobs', schemas.jobsArray, {data: {subscriptionId}});
+export const fetchJobs = fetchEntity.bind(null, job, ({subscriptionId, limit, offset}) => {
+  return callApi('api/jobs', schemas.jobsArray, {data: {subscriptionId, limit, offset}});
 });
 
-export function* loadJobs(subscriptionId) {
-  yield call(fetchJobs, subscriptionId);
+export function* loadJobs({subscriptionId, limit, offset}) {
+  yield call(fetchJobs, {subscriptionId, limit, offset});
 }
 
 export function* watchLoadJobs() {
   /* eslint-disable no-constant-condition */
   while (true) {
   /* eslint-enable no-constant-condition */
-    const {subscriptionId} = yield take(LOAD_JOBS_PAGE);
+    const {subscriptionId, limit, offset} = yield take(LOAD_JOBS_PAGE);
 
-    yield fork(loadJobs, subscriptionId);
+    yield fork(loadJobs, {subscriptionId, limit, offset});
   }
 }

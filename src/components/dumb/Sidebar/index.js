@@ -1,5 +1,5 @@
 // libs
-import React from 'react';
+import React, {PropTypes} from 'react';
 // actions
 // components
 import {IndexLink} from 'react-router';
@@ -8,6 +8,10 @@ import {ListItem} from 'material-ui/List';
 import styles from './index.css';
 
 export default function Sidebar({subscriptions}) {
+  Sidebar.propTypes = {
+    subscriptions: PropTypes.object.isRequired,
+  };
+
   return (<div>
     <IndexLink to="/dashboard/subscription/new" activeClassName={styles.active}>
       <ListItem primaryText="+ Add Subscription" />

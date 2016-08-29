@@ -21,4 +21,5 @@ JobList.propTypes = {
     PropTypes.object,
     PropTypes.array,
   ]).isRequired,
+  isLoading: PropTypes.bool,
 };

@@ -18,7 +18,11 @@ function entities(state = {users: {}}, action) {
   switch (action.type) {
     case job.actionTypes.getJobs.SUCCESS: {
       const newState = {
-        ...defaultEntitiesReducer(state, action),
+        ...state,
+        jobs: {
+          ...state.jobs,
+          ...action.response.entities.jobs,
+        },
       };
       if (action.subscriptionId) {
         newState.subscriptionJobs = {

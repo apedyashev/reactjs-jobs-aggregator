@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import test from 'ava';
 import {mount} from 'enzyme';
 import React from 'react';

@@ -1,5 +1,5 @@
 // libs
-import React from 'react';
+import React, {PropTypes} from 'react';
 import CircularProgress from 'material-ui/CircularProgress';
 
 export default function Loader({size = 1.5}) {
@@ -9,3 +9,7 @@ export default function Loader({size = 1.5}) {
     </div>
   );
 }
+
+Loader.propTypes = {
+  size: PropTypes.number,
+};

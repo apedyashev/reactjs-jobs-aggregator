@@ -1,7 +1,47 @@
 .item {
+  .content {
+    width: 100%;
+    overflow: hidden;
+    a {
+      float: left;
+    }
+  }
+  .confirmationContent {
+    display: none;
+  }
+
   :hover .icons {
     display: block;
   }
+
+  &.removeRequested {
+    /*overflow: hidden;*/
+    .content {
+      display: none;
+    }
+    .confirmationContent {
+      display: inline;
+
+      > span {
+        padding: 16px 7px;
+        display: inline-block;
+      }
+      .confirmLabel {
+        width: 61%;
+        text-align: center;
+      }
+      .confirmDelete {
+        background-color: #f33;
+      }
+      .cancelDelete {
+        background-color: grey;
+      }
+    }
+    :hover .icons {
+      display: none;
+    }
+  }
+
 
   > div {
     > div {
@@ -16,6 +56,7 @@
     display: block;
     position: relative;
     padding: 16px;
+    width: 70%;
 
     &.active {
       border-left: 3px solid red;
@@ -26,6 +67,6 @@
     float: right;
     display: none;
     position: relative;
-    top: -35px;
+    top: 14px;
   }
 }

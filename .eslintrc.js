@@ -32,7 +32,7 @@ module.exports = {
     "react/jsx-filename-extension": ["off"],
     "max-len": ["off"],
     "global-require": ["off"],
-    "arrow-body-style": [2, "always"],
+    "arrow-body-style": ["off"],
     "arrow-parens": [2, "always"],
     "object-curly-spacing": [1, "never"],
     "import/no-extraneous-dependencies": ["off"],

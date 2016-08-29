@@ -4,6 +4,7 @@ import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 // actions
 import {loadDashboardPage} from 'actions/Dashboard';
+import {removeSubscription} from 'actions/Subscription';
 // components
 import Sidebar from 'components/dumb/Sidebar';
 import styles from './index.css';
@@ -14,6 +15,7 @@ class DashboardPage extends React.Component {
     subscriptions: PropTypes.object.isRequired,
     children: PropTypes.node,
     loadDashboardPage: PropTypes.func.isRequired,
+    removeSubscription: PropTypes.func.isRequired,
   };
 
   componentWillMount() {
@@ -24,7 +26,7 @@ class DashboardPage extends React.Component {
     const {subscriptions, children} = this.props;
     return (<div className={styles.container}>
       <div className={styles.subscriptions}>
-        <Sidebar subscriptions={subscriptions} />
+        <Sidebar subscriptions={subscriptions} removeSubscription={this.props.removeSubscription} />
       </div>
       <div className={styles.content}>
         {children}
@@ -41,4 +43,5 @@ function select(state) {
 
 export default connect(select, {
   loadDashboardPage,
+  removeSubscription,
 })(DashboardPage);

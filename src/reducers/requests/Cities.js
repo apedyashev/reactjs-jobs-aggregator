@@ -6,12 +6,12 @@ const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case actionTypes.getCities.REQUEST:
+    case actionTypes.fetch.REQUEST:
       return {
         isLoading: true,
       };
-    case actionTypes.getCities.SUCCESS:
-    case actionTypes.getCities.FAILURE:
+    case actionTypes.fetch.SUCCESS:
+    case actionTypes.fetch.FAILURE:
       return {
         isLoading: false,
       };

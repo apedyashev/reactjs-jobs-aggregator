@@ -1,5 +1,6 @@
 import {createRequestTypes, action} from 'helpers/actions';
 
+// TODO: must be actionTypes = {fetch: createRequestTypes('GET_USER')}
 export const actionTypes = createRequestTypes('USER');
 export const LOAD_LOGGED_USER = 'LOAD_LOGGED_USER';
 

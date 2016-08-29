@@ -7,9 +7,10 @@ import SubscriptionList from 'components/dumb/SubscriptionList';
 import {ListItem} from 'material-ui/List';
 import styles from './index.css';
 
-export default function Sidebar({subscriptions}) {
+export default function Sidebar({subscriptions, removeSubscription}) {
   Sidebar.propTypes = {
     subscriptions: PropTypes.object.isRequired,
+    removeSubscription: PropTypes.func.isRequired,
   };
 
   return (<div>
@@ -20,6 +21,9 @@ export default function Sidebar({subscriptions}) {
       <ListItem primaryText="All Jobs" />
     </IndexLink>
 
-    <SubscriptionList subscriptions={subscriptions} />
+    <SubscriptionList
+      subscriptions={subscriptions}
+      removeSubscription={removeSubscription}
+    />
   </div>);
 }

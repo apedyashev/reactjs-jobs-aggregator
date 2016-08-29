@@ -1,21 +1,15 @@
 import {createRequestTypes, action} from 'helpers/actions';
 
 export const actionTypes = {
-  getCities: createRequestTypes('GET_CITIES'),
+  fetch: createRequestTypes('GET_CITIES'),
 };
 // export const GET_CITIES = 'GET_CITIES';
 
 export const actionCreators = {
   getCities: {
-    request: () => {
-      return action(actionTypes.getCities.REQUEST);
-    },
-    success: (id, response) => {
-      return action(actionTypes.getCities.SUCCESS, {response});
-    },
-    failure: (id, error) => {
-      return action(actionTypes.getCities.FAILURE, {error});
-    },
+    request: () => action(actionTypes.fetch.REQUEST),
+    success: (id, response) => action(actionTypes.fetch.SUCCESS, {response}),
+    failure: (id, error) => action(actionTypes.fetch.FAILURE, {error}),
   },
 };
 

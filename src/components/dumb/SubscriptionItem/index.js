@@ -10,7 +10,8 @@ import styles from './index.css';
 class SubscriptionItem extends React.Component {
   static propTypes = {
     data: PropTypes.object.isRequired,
-    onRemoveRequesChanged: PropTypes.func,
+    onRemoveRequesChanged: PropTypes.func.isRequired,
+    removeConfirmed: PropTypes.func.isRequired,
   };
 
   state = {
@@ -31,6 +32,10 @@ class SubscriptionItem extends React.Component {
     this.props.onRemoveRequesChanged(this.props.data.id, false);
   }
 
+  handleRemoveConfirmed = () => {
+    this.props.removeConfirmed(this.props.data.id);
+  }
+
   render() {
     const {data} = this.props;
     const {removeRequested} = this.state;
@@ -38,6 +43,7 @@ class SubscriptionItem extends React.Component {
       [styles.item]: true,
       [styles.removeRequested]: removeRequested,
     });
+
     return (<ListItem className={itemClassNames}>
       <div className={styles.content}>
         <Link to={`/dashboard/subscription/${data.id}`} activeClassName={styles.active} className={styles.label}>
@@ -50,7 +56,7 @@ class SubscriptionItem extends React.Component {
       </div>
       <div className={styles.confirmationContent}>
         <span className={styles.confirmLabel}>Delete?</span>
-        <span className={styles.confirmDelete}>Yes</span>
+        <span className={styles.confirmDelete} onClick={this.handleRemoveConfirmed}>Yes</span>
         <span className={styles.cancelDelete} onClick={this.handleRemovingCancel}>No</span>
       </div>
     </ListItem>);

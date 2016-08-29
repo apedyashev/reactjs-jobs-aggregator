@@ -1,6 +1,9 @@
 .wrapper {
   .tag {
-    display: inline !important;
+    display: inline-block !important;
+    > span {
+      float: left;
+    }
   }
 
   input {

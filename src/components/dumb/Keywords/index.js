@@ -13,9 +13,14 @@ class Keywords extends React.Component {
     onChange: PropTypes.func.isRequired,
   };
 
-  renderTag(props) {
-    return (<Chip key={props.key} className={styles.tag}>
-      {props.tag}
+  renderTag = (tagProps) => {
+    const {tag, key, onRemove} = tagProps;
+    return (<Chip
+      key={key}
+      className={styles.tag}
+      onRequestDelete={() => { onRemove(key); }}
+    >
+      {tag}
     </Chip>);
   }
 
@@ -26,6 +31,8 @@ class Keywords extends React.Component {
   render() {
     return (<div className={styles.wrapper}>
       <TagsInput
+        addKeys={[9, 13, 188]}
+        addOnBlur
         renderTag={this.renderTag}
         onChange={this.handleChange}
         value={this.props.value || []}

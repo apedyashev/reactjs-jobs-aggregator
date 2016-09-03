@@ -4,7 +4,7 @@ import React, {PropTypes} from 'react';
 // components
 import TagsInput from 'react-tagsinput';
 import Chip from 'material-ui/Chip';
-// import TagInput from 'components/dumb/TagInput';
+import {Input} from 'components/dumb/Base';
 import styles from './index.css';
 
 class Keywords extends React.Component {
@@ -24,6 +24,20 @@ class Keywords extends React.Component {
     </Chip>);
   }
 
+  renderInput = (inputProps) => {
+    const {onChange, value, ...other} = inputProps;
+    return (
+      <Input
+        className={styles.input}
+        hintText="Please, enter keywords"
+        onChange={onChange}
+        value={value}
+        {...other}
+        placeholder={null}
+      />
+    );
+  }
+
   handleChange = (newItems) => {
     this.props.onChange({target: {value: newItems}});
   }
@@ -31,9 +45,13 @@ class Keywords extends React.Component {
   render() {
     return (<div className={styles.wrapper}>
       <TagsInput
-        addKeys={[9, 13, 188]}
         addOnBlur
+        onlyUnique
+        addOnPaste
+        inputProps={{className: styles.tagsinput}}
+        addKeys={[9, 13, 188]}
         renderTag={this.renderTag}
+        renderInput={this.renderInput}
         onChange={this.handleChange}
         value={this.props.value || []}
       />

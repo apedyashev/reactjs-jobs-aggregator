@@ -1,0 +1,15 @@
+.header {
+  overflow: hidden;
+  padding: 0 16px !important;
+  > div:first-child {
+    display: none !important;
+  }
+
+  .title {
+    line-height: 48px;
+  }
+
+  .search {
+    float: right;
+  }
+}

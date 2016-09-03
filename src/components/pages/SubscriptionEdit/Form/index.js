@@ -3,10 +3,12 @@ import React, {PropTypes} from 'react';
 // actions
 import {saveSubscription} from 'actions/Subscription';
 // components
-import {Input, Button} from 'components/dumb/Base';
+import {Input} from 'components/dumb/Base';
 import Keywords from 'components/dumb/Keywords';
 import CitiesList from 'components/dumb/CitiesList';
 import reactForm from 'components/smart/Form';
+// other
+import styles from './index.css';
 
 class SubscriptionEditForm extends React.Component {
   static propTypes = {
@@ -26,10 +28,10 @@ class SubscriptionEditForm extends React.Component {
 
   render() {
     const {fields: {title, keywords, cities}, handleSubmit, allCities, requests} = this.props;
-
     return (
       <form ref={this.props.formRef} onSubmit={handleSubmit(this.submitForm)}>
         <Input
+          className={styles.title}
           hintText="Please, enter subscription title"
           floatingLabelText="Title"
           errorText={title.error}
@@ -40,9 +42,6 @@ class SubscriptionEditForm extends React.Component {
         </div>
         <div>
           <CitiesList items={allCities} {...cities} value={cities.value || []} isLoading={requests.cities.isLoading} />
-        </div>
-        <div>
-          <Button type="submit" label="Save" />
         </div>
       </form>
     );

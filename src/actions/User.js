@@ -11,7 +11,7 @@ export const user = {
   success: (id, response) => {
     return action(actionTypes.SUCCESS, {response});
   },
-  failure: (error) => {
+  failure: (id, error) => {
     return action(actionTypes.FAILURE, {error});
   },
 };

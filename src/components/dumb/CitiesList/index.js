@@ -4,10 +4,13 @@ import React, {PropTypes} from 'react';
 import _ from 'lodash';
 // actions
 // components
-import {Card, CardHeader, CardText} from 'material-ui/Card';
+import {Card, CardHeader, CardText, CardActions} from 'material-ui/Card';
 import Loader from 'components/dumb/Loader';
 import CityItem from 'components/dumb/CityItem';
+import {Input, Button} from 'components/dumb/Base';
 import Infinite from 'react-infinite';
+import IconSearch from 'react-icons/lib/md/search';
+import styles from './index.css';
 
 class CitiesList extends React.Component {
   static propTypes = {
@@ -79,9 +82,13 @@ class CitiesList extends React.Component {
     const {value, isLoading} = this.props;
     const {items} = this.state;
     return (<Card>
-      <CardHeader>
-        Select cities
-        <input onChange={this.handleSearchChange} />
+      <CardHeader className={styles.header}>
+        <span className={styles.title}>Select cities</span>
+        <Input
+          className={styles.search}
+          hintText={(<span><IconSearch /> Search by city name</span>)}
+          onChange={this.handleSearchChange}
+        />
       </CardHeader>
       <CardText expandable={false}>
         {isLoading ? (<Loader />) : null}
@@ -97,6 +104,9 @@ class CitiesList extends React.Component {
           })}
         </Infinite>
       </CardText>
+      <CardActions>
+        <Button type="submit" label="Save" />
+      </CardActions>
     </Card>);
   }
 }

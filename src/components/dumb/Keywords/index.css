@@ -6,9 +6,8 @@
     }
   }
 
-  input {
+  .input, .tagsinput {
     border: 0;
-    border-bottom: 1px solid grey;
-    width: 100%;
+    width: 100% !important;
   }
 }

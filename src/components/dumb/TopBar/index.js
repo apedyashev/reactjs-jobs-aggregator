@@ -13,7 +13,7 @@ export default function TopBar({authenticated}) {
         <Link to="/dashboard" className={styles.item} activeClassName={styles.active}>
           <MenuItem primaryText="Dashboard" />
         </Link>
-        <Link to="/stats" className={styles.item} activeClassName={styles.active}>
+        <Link to="/statistics" className={styles.item} activeClassName={styles.active}>
           <MenuItem primaryText="Statistics" />
         </Link>
       </div>

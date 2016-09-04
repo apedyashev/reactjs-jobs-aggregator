@@ -3,6 +3,7 @@ import {watchGetLoggedUser} from './user';
 import {watchSubmitLoginForm} from './login';
 import {watchLoadDashboardPage} from './dashboard';
 import {watchLoadJobs} from './job';
+import {watchLoadStatisticsPage} from './statistics';
 import {
   watchSaveSubscription,
   watchLoadEditSubscriptiondPage,
@@ -18,5 +19,6 @@ export default function* root() {
     fork(watchSaveSubscription),
     fork(watchRemoveSubscription),
     fork(watchLoadEditSubscriptiondPage),
+    fork(watchLoadStatisticsPage),
   ];
 }

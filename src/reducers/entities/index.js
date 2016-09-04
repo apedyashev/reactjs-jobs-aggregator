@@ -4,6 +4,7 @@ import users from './users';
 import jobs from './jobs';
 import cities from './cities';
 import subscriptionJobs from './subscriptionJobs';
+import statistics from './statistics';
 
 export default combineReducers({
   subscriptions,
@@ -11,4 +12,5 @@ export default combineReducers({
   users,
   jobs,
   cities,
+  statistics,
 });

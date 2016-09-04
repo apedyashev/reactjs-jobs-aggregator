@@ -4,6 +4,7 @@ import _ from 'lodash';
 // actions
 // components
 import SubscriptionItem from 'components/dumb/SubscriptionItem';
+import Loader from 'components/dumb/Loader';
 import {List} from 'material-ui/List';
 
 
@@ -22,10 +23,11 @@ class SubscriptionList extends React.Component {
   }
 
   render() {
-    const {subscriptions, request: {removingId}} = this.props;
+    const {subscriptions, request: {isLoading, removingId}} = this.props;
     const {itemToBeRemovedId} = this.state;
 
     return (<List>
+      {isLoading ? (<Loader />) : null}
       {_.map(subscriptions, (subscription) => {
         return (removingId !== subscription.id) ? (<SubscriptionItem
           key={subscription.id}

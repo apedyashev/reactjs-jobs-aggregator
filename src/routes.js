@@ -9,6 +9,7 @@ import RegisterPage from 'components/pages/Register';
 import Dashboard from 'components/pages/Dashboard';
 import JobsPage from 'components/pages/Jobs';
 import SubscriptionEditPage from 'components/pages/SubscriptionEdit';
+import StatisticsPage from 'components/pages/Statistics';
 import NotFoundView from 'components/pages/NotFound';
 
 export default [
@@ -21,6 +22,7 @@ export default [
       <Route path="subscription/new" component={SubscriptionEditPage} />
       <Route path="subscription/:id" component={JobsPage} />
     </Route>
+    <Route path="statistics" component={StatisticsPage} />
     <Route path="404" component={NotFoundView} />
   </Route>,
   <Route path="/" component={AppAuth}>

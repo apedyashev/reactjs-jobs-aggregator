@@ -2,14 +2,15 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {push} from 'react-router-redux';
+// actions
+import {loadLoggedUser} from 'actions/user';
 // components
 import TopBar from 'components/dumb/TopBar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import muiTheme from './MuiTheme';
 import injectTapEventPlugin from './InjectTapEventPlugin';
-// actions
-import {loadLoggedUser} from 'actions/User';
+
 
 require('normalize.css');
 require('./normalizes-overwrites.css');

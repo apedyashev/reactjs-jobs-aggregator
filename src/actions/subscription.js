@@ -1,47 +1,53 @@
 import {createRequestTypes, action} from 'helpers/actions';
 
-// TODO: async actions?
 export const actionTypes = {
-  // getSubscription: createRequestTypes('SUBSCRIPTION'),
-  fetch: createRequestTypes('SUBSCRIPTIONS'),
-  update: createRequestTypes('UPDATE_SUBSCRIPTION'),
-  create: createRequestTypes('CREATE_SUBSCRIPTION'),
-  remove: createRequestTypes('REMOVE_SUBSCRIPTION'),
+  subscription: {
+    update: createRequestTypes('UPDATE_SUBSCRIPTION'),
+    create: createRequestTypes('CREATE_SUBSCRIPTION'),
+    remove: createRequestTypes('REMOVE_SUBSCRIPTION'),
+  },
+  subscriptions: {
+    fetch: createRequestTypes('SUBSCRIPTIONS'),
+  },
 };
-// TODO: refactor
+// TODO: refactor - maybe put in actionTypes???
 export const SAVE_SUBSCRIPTION = 'SAVE_SUBSCRIPTION';
 export const REMOVE_SUBSCRIPTION = 'REMOVE_SUBSCRIPTION';
 export const LOAD_EDIT_SUBSCRIPTION_PAGE = 'LOAD_EDIT_SUBSCRIPTION_PAGE';
 
 export const actionCreators = {
-  fetch: {
-    request: () => action(actionTypes.fetch.REQUEST),
-    success: (id, response) => action(actionTypes.fetch.SUCCESS, {response}),
-    failure: (id, error) => action(actionTypes.fetch.FAILURE, {error}),
-  },
-  remove: {
-    request: ({id}) => action(actionTypes.remove.REQUEST, {id}),
-    success: ({id}, response) => action(actionTypes.remove.SUCCESS, {id, response}),
-    failure: ({id}, error) => action(actionTypes.remove.FAILURE, {id, error}),
-  },
-  save: {
-    request: (id, data) => {
-      if (id) {
-        return action(actionTypes.update.REQUEST, {id, data});
-      }
-      return action(actionTypes.create.REQUEST, {data});
+  subscription: {
+    save: {
+      request: (id, data) => {
+        if (id) {
+          return action(actionTypes.subscription.update.REQUEST, {id, data});
+        }
+        return action(actionTypes.subscription.create.REQUEST, {data});
+      },
+      success: (id, response) => {
+        if (id) {
+          return action(actionTypes.subscription.update.SUCCESS, {id, response});
+        }
+        return action(actionTypes.subscription.create.SUCCESS, {response});
+      },
+      failure: (id, error) => {
+        if (id) {
+          return action(actionTypes.subscription.update.FAILURE, {id, error});
+        }
+        return action(actionTypes.subscription.create.FAILURE, {error});
+      },
     },
-    success: (id, response) => {
-      if (id) {
-        return action(actionTypes.update.SUCCESS, {id, response});
-      }
-      return action(actionTypes.create.SUCCESS, {response});
+    remove: {
+      request: ({id}) => action(actionTypes.subscription.remove.REQUEST, {id}),
+      success: ({id}, response) => action(actionTypes.subscription.remove.SUCCESS, {id, response}),
+      failure: ({id}, error) => action(actionTypes.subscription.remove.FAILURE, {id, error}),
     },
-    failure: (id, error) => {
-      if (id) {
-        return action(actionTypes.update.FAILURE, {id, error});
-      }
-      return action(actionTypes.create.FAILURE, {error});
+  },
+  subscriptions: {
+    fetch: {
+      request: () => action(actionTypes.subscriptions.fetch.REQUEST),
+      success: (id, response) => action(actionTypes.subscriptions.fetch.SUCCESS, {response}),
+      failure: (id, error) => action(actionTypes.subscriptions.fetch.FAILURE, {error}),
     },
   },
 };

@@ -1,4 +1,4 @@
-import {actionTypes} from 'actions/Subscription';
+import {actionTypes} from 'actions/subscription';
 
 const initialState = {
   isLoading: false,
@@ -6,18 +6,18 @@ const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case actionTypes.fetch.REQUEST:
+    case actionTypes.subscriptions.fetch.REQUEST:
       return {...state, isLoading: true};
 
-    case actionTypes.fetch.SUCCESS:
-    case actionTypes.fetch.FAILURE:
+    case actionTypes.subscriptions.fetch.SUCCESS:
+    case actionTypes.subscriptions.fetch.FAILURE:
       return {...state, isLoading: false};
 
-    case actionTypes.remove.REQUEST:
+    case actionTypes.subscription.remove.REQUEST:
       return {...state, removingId: action.id};
 
-    case actionTypes.remove.SUCCESS:
-    case actionTypes.remove.FAILURE:
+    case actionTypes.subscription.remove.SUCCESS:
+    case actionTypes.subscription.remove.FAILURE:
       return {...state, removingId: null};
 
     default:

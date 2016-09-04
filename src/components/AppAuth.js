@@ -1,6 +1,5 @@
 /* eslint react/prefer-stateless-function: "off" */
 import React, {Component, PropTypes} from 'react';
-// import injectTapEventPlugin from 'react-tap-event-plugin';
 // components
 import TopBar from 'components/dumb/TopBar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';

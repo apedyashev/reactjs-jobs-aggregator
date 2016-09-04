@@ -13,12 +13,14 @@ schemas.citiesArray = {
   cities: arrayOf(schemas.city),
 };
 
-export const api = {
-  fetchCities: fetchEntity.bind(null, actionCreators.getCities, () => {
-    return callApi('/api/jobs/stats?cities=true', schemas.citiesArray);
-  }),
+const api = {
+  cities: {
+    fetch: fetchEntity.bind(null, actionCreators.cities.fetch, () => {
+      return callApi('/api/jobs/stats?cities=true', schemas.citiesArray);
+    }),
+  },
 };
 
 export function* loadCities() {
-  yield call(api.fetchCities);
+  yield call(api.cities.fetch);
 }

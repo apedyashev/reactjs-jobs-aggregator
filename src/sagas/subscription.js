@@ -8,39 +8,43 @@ import {
 import {Schema, arrayOf} from 'normalizr';
 import callApi from 'services/api';
 import {fetchEntity} from 'helpers/sagas';
-import {loadCities} from './City';
+import {loadCities} from './city';
 
 const schemas = {
   subscription: new Schema('subscriptions'),
 };
 schemas.subscriptionsArray = arrayOf(schemas.subscription);
 
-export const api = {
-  saveSubscription: fetchEntity.bind(null, actionCreators.save, ({id, data}) => {
-    const endpoint = id ? `api/subscriptions/${id}` : '/api/subscriptions';
-    const method = id ? 'PUT' : 'POST';
-    return callApi(endpoint, schemas.subscription, {method, data});
-  }),
-  removeSubscription: fetchEntity.bind(null, actionCreators.remove, ({id}) => {
-    const endpoint = `api/subscriptions/${id}`;
-    const method = 'DELETE';
-    return callApi(endpoint, schemas.subscription, {method});
-  }),
-  fetchSubscriptions: fetchEntity.bind(null, actionCreators.fetch, () => {
-    return callApi('api/subscriptions', schemas.subscriptionsArray);
-  }),
+const api = {
+  subscription: {
+    save: fetchEntity.bind(null, actionCreators.subscription.save, ({id, data}) => {
+      const endpoint = id ? `api/subscriptions/${id}` : '/api/subscriptions';
+      const method = id ? 'PUT' : 'POST';
+      return callApi(endpoint, schemas.subscription, {method, data});
+    }),
+    remove: fetchEntity.bind(null, actionCreators.subscription.remove, ({id}) => {
+      const endpoint = `api/subscriptions/${id}`;
+      const method = 'DELETE';
+      return callApi(endpoint, schemas.subscription, {method});
+    }),
+  },
+  subscriptions: {
+    fetch: fetchEntity.bind(null, actionCreators.subscriptions.fetch, () => {
+      return callApi('api/subscriptions', schemas.subscriptionsArray);
+    }),
+  },
 };
 
 export function* loadSubscriptions() {
-  yield call(api.fetchSubscriptions);
+  yield call(api.subscriptions.fetch);
 }
 
 export function* saveSubscription(id, data) {
-  yield call(api.saveSubscription, {id, data});
+  yield call(api.subscription.save, {id, data});
 }
 
 export function* removeSubscription(id) {
-  yield call(api.removeSubscription, {id});
+  yield call(api.subscription.remove, {id});
 }
 
 export function* watchSaveSubscription() {

@@ -1,36 +1,37 @@
 import {take, call, fork, select} from 'redux-saga/effects';
-import {user, LOAD_LOGGED_USER} from 'actions/user';
+import {actionCreators, LOAD_LOGGED_USER} from 'actions/user';
 import {Schema/* arrayOf */} from 'normalizr';
 import callApi from 'services/api';
 import selectors from 'reducers/selectors';
 import {fetchEntity} from 'helpers/sagas';
-// import {loadStarred} from 'sagas/StarredRepos';
 
 export const schemas = {
-  user: new Schema('users', {
-    // idAttribute: 'login',
-  }),
+  user: new Schema('users'),
 };
-export const fetchUser = fetchEntity.bind(null, user, () => {
-  return callApi('/api/users/me', schemas.user);
-});
+
+const api = {
+  user: {
+    fetch: fetchEntity.bind(null, actionCreators.loggedUser.fetch, () => {
+      return callApi('/api/users/me', schemas.user);
+    }),
+  },
+};
 
 // load user unless it is cached
-function* loadUser() {
+function* loadLoggedUser() {
   const loadedUser = yield select(selectors.getUser);
 
   if (!loadedUser) {
-    yield call(fetchUser);
+    yield call(api.user.fetch);
   }
 }
 
-// Fetches data for a User : user data + starred repos
 export function* watchGetLoggedUser() {
   /* eslint-disable no-constant-condition */
   while (true) {
   /* eslint-enable no-constant-condition */
     yield take(LOAD_LOGGED_USER);
 
-    yield fork(loadUser);
+    yield fork(loadLoggedUser);
   }
 }

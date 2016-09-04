@@ -1,10 +1,10 @@
-import {actionTypes} from 'actions/Job';
+import {actionTypes} from 'actions/job';
 
 const initialState = {};
 
 export default function subscriptionJobs(state = initialState, action) {
   switch (action.type) {
-    case actionTypes.fetch.SUCCESS:
+    case actionTypes.jobs.fetch.SUCCESS:
       if (action.subscriptionId) {
         return {
           ...state,

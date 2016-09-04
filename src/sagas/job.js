@@ -1,5 +1,5 @@
 import {call, take, fork} from 'redux-saga/effects';
-import {job, LOAD_JOBS_PAGE} from 'actions/job';
+import {actionCreators, LOAD_JOBS_PAGE} from 'actions/job';
 import {Schema, arrayOf} from 'normalizr';
 import callApi from 'services/api';
 import {fetchEntity} from 'helpers/sagas';
@@ -9,12 +9,16 @@ const schemas = {
 };
 schemas.jobsArray = arrayOf(schemas.job);
 
-export const fetchJobs = fetchEntity.bind(null, job, ({subscriptionId, limit, offset}) => {
-  return callApi('api/jobs', schemas.jobsArray, {data: {subscriptionId, limit, offset}});
-});
+const api = {
+  jobs: {
+    fetch: fetchEntity.bind(null, actionCreators.job.fetch, ({subscriptionId, limit, offset}) => {
+      return callApi('api/jobs', schemas.jobsArray, {data: {subscriptionId, limit, offset}});
+    }),
+  },
+};
 
 export function* loadJobs({subscriptionId, limit, offset}) {
-  yield call(fetchJobs, {subscriptionId, limit, offset});
+  yield call(api.jobs.fetch, {subscriptionId, limit, offset});
 }
 
 export function* watchLoadJobs() {

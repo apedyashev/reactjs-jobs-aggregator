@@ -16,7 +16,6 @@ class SubscriptionEditForm extends React.Component {
     fields: PropTypes.object.isRequired,
     allCities: PropTypes.object,
     requests: PropTypes.object.isRequired,
-    formRef: PropTypes.object.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     saveSubscription: PropTypes.func.isRequired,
   };
@@ -29,7 +28,7 @@ class SubscriptionEditForm extends React.Component {
   render() {
     const {fields: {title, keywords, cities}, handleSubmit, allCities, requests} = this.props;
     return (
-      <form ref={this.props.formRef} onSubmit={handleSubmit(this.submitForm)}>
+      <form onSubmit={handleSubmit(this.submitForm)}>
         <Input
           className={styles.title}
           hintText="Please, enter subscription title"

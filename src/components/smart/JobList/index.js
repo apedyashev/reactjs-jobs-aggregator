@@ -54,7 +54,6 @@ function select(state, ownProps) {
       return jobs[jobId];
     });
   }
-  console.log('subscriptionId, selectedJobs', subscriptionId, subscriptionJobs, selectedJobs);
   const perPage = ownProps.limit || 20;
   const totalCount = _.keys(selectedJobs).length;
   const pagedJobs = _(selectedJobs).keys().chunk(perPage).value()

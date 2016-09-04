@@ -27,6 +27,7 @@ export default (options, mapStateToProps, mapDispatchToProps) => {
         const fields = _(this.fields).zipObject().mapValues((value, fieldName) => {
           const objectField = {
             name: fieldName,
+            // TODO: init with default values
             value: initialValues[fieldName] || '',
             onChange: (event, newValue) => {
               // objectField.value = newValue;

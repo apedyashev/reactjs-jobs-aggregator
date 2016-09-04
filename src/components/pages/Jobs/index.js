@@ -13,7 +13,7 @@ class DashboardPage extends React.Component {
     subscriptionId: PropTypes.oneOfType([
       PropTypes.string, // it can be md5 hash for example
       PropTypes.number,
-    ]).isRequired,
+    ]),
     loadJobs: PropTypes.func.isRequired,
   };
 

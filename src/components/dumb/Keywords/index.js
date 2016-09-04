@@ -1,5 +1,6 @@
 // libs
 import React, {PropTypes} from 'react';
+import _ from 'lodash';
 // actions
 // components
 import TagsInput from 'react-tagsinput';
@@ -32,7 +33,7 @@ class Keywords extends React.Component {
         hintText="Please, enter keywords"
         onChange={onChange}
         value={value}
-        {...other}
+        {..._.omit(other, 'addTag', 'ref')}
         placeholder={null}
       />
     );

@@ -1,6 +1,6 @@
 import {take, fork} from 'redux-saga/effects';
-import {LOAD_DASHBOARD_PAGE} from 'actions/Dashboard';
-import {loadSubscriptions} from './Subscription';
+import {LOAD_DASHBOARD_PAGE} from 'actions/dashboard';
+import {loadSubscriptions} from './subscription';
 
 export function* watchLoadDashboardPage() {
   /* eslint-disable no-constant-condition */

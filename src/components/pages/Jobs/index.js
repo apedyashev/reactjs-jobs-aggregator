@@ -3,7 +3,7 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 // actions
-import {loadJobs} from 'actions/Job';
+import {loadJobs} from 'actions/job';
 // components
 import JobList from 'components/smart/JobList';
 

@@ -3,8 +3,8 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 // actions
-import {loadDashboardPage} from 'actions/Dashboard';
-import {removeSubscription} from 'actions/Subscription';
+import {loadDashboardPage} from 'actions/dashboard';
+import {removeSubscription} from 'actions/subscription';
 // components
 import Sidebar from 'components/dumb/Sidebar';
 import styles from './index.css';

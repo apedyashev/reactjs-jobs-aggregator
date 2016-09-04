@@ -4,7 +4,7 @@ import {
   SAVE_SUBSCRIPTION,
   LOAD_EDIT_SUBSCRIPTION_PAGE,
   REMOVE_SUBSCRIPTION,
-} from 'actions/Subscription';
+} from 'actions/subscription';
 import {Schema, arrayOf} from 'normalizr';
 import callApi from 'services/api';
 import {fetchEntity} from 'helpers/sagas';

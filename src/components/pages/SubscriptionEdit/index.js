@@ -2,7 +2,7 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 // actions
-import {loadSubscriptionPage} from 'actions/Subscription';
+import {loadSubscriptionPage} from 'actions/subscription';
 // components
 import EditForm from './Form';
 

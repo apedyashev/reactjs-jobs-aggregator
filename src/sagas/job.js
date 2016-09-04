@@ -1,5 +1,5 @@
 import {call, take, fork} from 'redux-saga/effects';
-import {job, LOAD_JOBS_PAGE} from 'actions/Job';
+import {job, LOAD_JOBS_PAGE} from 'actions/job';
 import {Schema, arrayOf} from 'normalizr';
 import callApi from 'services/api';
 import {fetchEntity} from 'helpers/sagas';

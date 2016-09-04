@@ -1,5 +1,5 @@
 import {take, call, fork, select} from 'redux-saga/effects';
-import {user, LOAD_LOGGED_USER} from 'actions/User';
+import {user, LOAD_LOGGED_USER} from 'actions/user';
 import {Schema/* arrayOf */} from 'normalizr';
 import callApi from 'services/api';
 import selectors from 'reducers/selectors';

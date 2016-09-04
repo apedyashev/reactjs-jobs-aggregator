@@ -1,6 +1,6 @@
 import {call} from 'redux-saga/effects';
-import {actionCreators} from 'actions/City';
 import {Schema, arrayOf} from 'normalizr';
+import {actionCreators} from 'actions/city';
 import callApi from 'services/api';
 import {fetchEntity} from 'helpers/sagas';
 

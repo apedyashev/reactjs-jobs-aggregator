@@ -3,7 +3,7 @@ import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import _ from 'lodash';
 // actions
-import {loadJobs} from 'actions/Job';
+import {loadJobs} from 'actions/job';
 // components
 import Waypoint from 'react-waypoint';
 import Loader from 'components/dumb/Loader';

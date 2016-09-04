@@ -2,7 +2,7 @@
 import React, {PropTypes} from 'react';
 // import {connect} from 'react-redux';
 // actions
-import {submitLogin} from 'actions/Login';
+import {submitLogin} from 'actions/login';
 // components
 import {Input} from 'components/dumb/Base';
 import reactForm from 'components/smart/Form';

@@ -1,7 +1,7 @@
 // libs
 import React, {PropTypes} from 'react';
 // actions
-import {saveSubscription} from 'actions/Subscription';
+import {saveSubscription} from 'actions/subscription';
 // components
 import {Input} from 'components/dumb/Base';
 import Keywords from 'components/dumb/Keywords';

@@ -1,9 +1,13 @@
 import {fork} from 'redux-saga/effects';
-import {watchGetLoggedUser} from './User';
-import {watchSubmitLoginForm} from './Login';
-import {watchLoadDashboardPage} from './Dashboard';
-import {watchLoadJobs} from './Job';
-import {watchSaveSubscription, watchLoadEditSubscriptiondPage, watchRemoveSubscription} from './Subscription';
+import {watchGetLoggedUser} from './user';
+import {watchSubmitLoginForm} from './login';
+import {watchLoadDashboardPage} from './dashboard';
+import {watchLoadJobs} from './job';
+import {
+  watchSaveSubscription,
+  watchLoadEditSubscriptiondPage,
+  watchRemoveSubscription,
+} from './subscription';
 
 export default function* root() {
   yield [

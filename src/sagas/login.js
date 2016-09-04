@@ -1,7 +1,6 @@
 import {take, call, fork} from 'redux-saga/effects';
-import {login, SUBMIT_LOGIN_FORM} from 'actions/Login';
+import {login, SUBMIT_LOGIN_FORM} from 'actions/login';
 import callApi from 'services/api';
-// import selectors from 'reducers/selectors';
 import {fetchEntity} from 'helpers/sagas';
 import {schemas} from './User';
 

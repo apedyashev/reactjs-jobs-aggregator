@@ -5,12 +5,16 @@ import _ from 'lodash';
 // actions
 import {loadStatisticsPage} from 'actions/statistics';
 // components
-import ProgressBar from 'components/dumb/ProgressBar';
+import {H4} from 'components/dumb/Base';
+import Loader from 'components/dumb/Loader';
+import StatsList from './StatsList';
 
 class StatisticsPage extends React.Component {
   static propTypes = {
-    totalAvailabilities: PropTypes.number.isRequired,
+    maxAvailabilities: PropTypes.number.isRequired,
+    maxJobs: PropTypes.number.isRequired,
     totalJobs: PropTypes.number.isRequired,
+    request: PropTypes.object.isRequired,
     availabilities: PropTypes.array.isRequired,
     cities: PropTypes.array.isRequired,
     loadStatisticsPage: PropTypes.func.isRequired,
@@ -21,46 +25,33 @@ class StatisticsPage extends React.Component {
   }
 
   render() {
-    const {cities, availabilities, totalJobs, totalAvailabilities} = this.props;
+    const {cities, availabilities, maxJobs, totalJobs, maxAvailabilities, request: {isLoading}} = this.props;
+    if (isLoading) {
+      return <Loader />;
+    }
 
     return (<div>
-      Total {totalJobs} in {_.keys(cities).length} cities
-      {_.map(cities, (city) => {
-        return (<ProgressBar
-          key={city.name}
-          pctComplete={(city.count * 100) / totalJobs}
-          backgroundColor="red"
-        >
-          {city.name} ({city.count})
-        </ProgressBar>);
-      })}
-
-      {_.map(availabilities, (availability) => {
-        return (<ProgressBar
-          key={availability.name}
-          pctComplete={(availability.count * 100) / totalAvailabilities}
-          backgroundColor="green"
-        >
-          {availability.name} ({availability.count})
-        </ProgressBar>);
-      })}
+      <H4>Total {totalJobs} jobs in {cities.length} cities</H4>
+      <StatsList items={cities} maxValue={maxJobs} color="red" />
+      <H4>Occupancies statistics</H4>
+      <StatsList items={availabilities} maxValue={maxAvailabilities} color="green" />
     </div>);
   }
 }
 
 function select(state) {
   const {cities, availabilities} = state.entities.statistics;
-  const totalJobs = _.reduce(cities, (prev, cur) => {
-    return {count: (prev.count + cur.count)};
-  }, {count: 0}).count;
-  const totalAvailabilities = _.reduce(availabilities, (prev, cur) => {
-    return {count: (prev.count + cur.count)};
-  }, {count: 0}).count;
+  const maxJobs = _.max(_.map(cities, (city) => city.count)) || 0;
+  const maxAvailabilities = _.max(_.map(availabilities, (availability) => availability.count)) || 0;
+  const totalJobs = _.reduce(cities, (prev, cur) => ({count: (prev.count + cur.count)}), {count: 0}).count;
+
   return {
     cities: _.orderBy(cities, 'count', 'desc'),
     availabilities: _.orderBy(availabilities, 'count', 'desc'),
+    request: state.requests.statistics,
+    maxJobs,
+    maxAvailabilities,
     totalJobs,
-    totalAvailabilities,
   };
 }
 

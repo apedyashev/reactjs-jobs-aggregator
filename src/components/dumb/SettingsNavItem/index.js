@@ -2,6 +2,7 @@
 import React, {PropTypes} from 'react';
 import classNames from 'classnames';
 // components
+import {Link} from 'react-router';
 import Avatar from 'components/dumb/Avatar';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
@@ -29,7 +30,7 @@ class SettingsNavItem extends React.Component {
   render() {
     const {user} = this.props;
     const {isMenuOpen} = this.state;
-    const avatar = <Avatar email={user.email} size={30} className={styles.avatar} />;
+    const avatar = <Avatar email={user.email || ''} size={30} className={styles.avatar} />;
     const expandIcon = isMenuOpen ? <MdExpandLessIcon /> : <MdExpandMoreIcon />;
 
     return (<span className={classNames(styles.component, this.props.className)}>
@@ -45,11 +46,9 @@ class SettingsNavItem extends React.Component {
         targetOrigin={{horizontal: 'left', vertical: 'top'}}
         onRequestChange={this.handleOnRequestChange}
       >
-        <MenuItem primaryText="Refresh" />
-        <MenuItem primaryText="Send feedback" />
-        <MenuItem primaryText="Settings" />
-        <MenuItem primaryText="Help" />
-        <MenuItem primaryText="Sign out" />
+        <MenuItem primaryText={<Link to="/settings/profile">Edit Profile</Link>} />
+        <MenuItem primaryText={<Link to="/settings/password">Change Password</Link>} />
+        <MenuItem primaryText="Sign Out" />
       </IconMenu>
     </span>);
   }

@@ -10,6 +10,8 @@ import Dashboard from 'components/pages/Dashboard';
 import JobsPage from 'components/pages/Jobs';
 import SubscriptionEditPage from 'components/pages/SubscriptionEdit';
 import StatisticsPage from 'components/pages/Statistics';
+import SettingsProfilePage from 'components/pages/SettingsProfile';
+import SettingsPasswordPage from 'components/pages/SettingsPassword';
 import NotFoundView from 'components/pages/NotFound';
 
 export default [
@@ -23,6 +25,8 @@ export default [
       <Route path="subscription/:id" component={JobsPage} />
     </Route>
     <Route path="statistics" component={StatisticsPage} />
+    <Route path="settings/profile" component={SettingsProfilePage} />
+    <Route path="settings/password" component={SettingsPasswordPage} />
     <Route path="404" component={NotFoundView} />
   </Route>,
   <Route path="/" component={AppAuth}>

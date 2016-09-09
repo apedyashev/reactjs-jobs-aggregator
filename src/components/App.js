@@ -10,6 +10,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import muiTheme from './MuiTheme';
 import injectTapEventPlugin from './InjectTapEventPlugin';
+import styles from './App.css';
 
 
 require('normalize.css');
@@ -37,7 +38,7 @@ class App extends Component {
   render() {
     return (
       <MuiThemeProvider muiTheme={getMuiTheme(muiTheme)}>
-        <div>
+        <div className={styles.container}>
           <TopNav authenticated user={this.props.loggedUser} />
           {this.props.children}
         </div>

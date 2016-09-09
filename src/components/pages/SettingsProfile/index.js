@@ -3,11 +3,14 @@ import React/* , {PropTypes} */ from 'react';
 import {connect} from 'react-redux';
 // actions
 // components
+import ProfileForm from './Form';
 
 class SettingsProfile extends React.Component {
   static propTypes = {};
   render() {
-    return (<div>SettingsProfile</div>);
+    return (<div>
+      <ProfileForm />
+    </div>);
   }
 }
 

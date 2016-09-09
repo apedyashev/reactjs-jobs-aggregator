@@ -1,8 +1,9 @@
 // libs
 import React from 'react';
 // components
+import PasswordForm from './Form';
 
 export default function SettingsPassword() {
-  return (<div>SettingsPassword</div>);
+  return (<PasswordForm />);
 }
 SettingsPassword.propTypes = {};

@@ -1,5 +1,5 @@
 import {fork} from 'redux-saga/effects';
-import {watchGetLoggedUser} from './user';
+import {watchGetLoggedUser, watchUpdateLoggedUser} from './user';
 import {watchSubmitLoginForm} from './login';
 import {watchLoadDashboardPage} from './dashboard';
 import {watchLoadJobs} from './job';
@@ -13,6 +13,7 @@ import {
 export default function* root() {
   yield [
     fork(watchGetLoggedUser),
+    fork(watchUpdateLoggedUser),
     fork(watchSubmitLoginForm),
     fork(watchLoadDashboardPage),
     fork(watchLoadJobs),

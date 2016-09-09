@@ -11,8 +11,6 @@ export default (options, mapStateToProps, mapDispatchToProps) => {
   }
 
   return (Form) => {
-    // const ConnectedForm = connect(mapStateToProps, mapDispatchToProps)(Form);
-
     class ReduxForm extends React.Component {
       static propTypes = {
         initialValues: PropTypes.object,
@@ -44,6 +42,16 @@ export default (options, mapStateToProps, mapDispatchToProps) => {
         }).value();
 
         this.setState({fields});
+      }
+
+      componentWillReceiveProps(newProps) {
+        const oldInitialValues = (this.props && _.isPlainObject(this.props.initialValues)) ? this.props.initialValues : {};
+        const newInitialValues = newProps.initialValues;
+        if (!_.isEqual(oldInitialValues, newInitialValues)) {
+          _.forIn(this.state.fields, (fieldVal, fieldName) => {
+            fieldVal.onChange(null, newInitialValues[fieldName]);
+          });
+        }
       }
 
       getValues(fields) {

@@ -1,7 +1,7 @@
 // libs
 import React, {PropTypes} from 'react';
 // actions
-// import {submitLogin} from 'actions/login';
+import {updateLoggedUser} from 'actions/user';
 // components
 import {H3, Button, Input} from 'components/dumb/Base';
 import reactForm from 'components/smart/Form';
@@ -12,11 +12,11 @@ class LoginForm extends React.Component {
     fields: PropTypes.object.isRequired,
     initialValues: PropTypes.object.isRequired,
     handleSubmit: PropTypes.func.isRequired,
+    updateLoggedUser: PropTypes.func.isRequired,
   }
 
   submitForm = (values) => {
-    console.log('submit values = ', values);
-    // return this.props.submitLogin(values.email, values.password);
+    return this.props.updateLoggedUser(values);
   }
 
   render() {
@@ -36,8 +36,12 @@ class LoginForm extends React.Component {
           errorText={lastName.error}
           {...lastName}
         />
-        <p>{email}</p>
-        <Button label="Save" />
+        <Input
+          floatingLabelText="Last Name"
+          value={email}
+          disabled
+        />
+        <Button label="Save" type="submit" />
       </form>
     );
   }
@@ -65,5 +69,5 @@ export default reactForm({
     initialValues: state.entities.users[loggedUserId] || {},
   };
 }, {
-  // submitLogin,
+  updateLoggedUser,
 })(LoginForm);

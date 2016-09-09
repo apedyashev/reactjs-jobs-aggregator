@@ -1,21 +1,8 @@
 // libs
-import React/* , {PropTypes} */ from 'react';
-import {connect} from 'react-redux';
-// actions
+import React from 'react';
 // components
 
-class SettingsPassword extends React.Component {
-  static propTypes = {};
-  render() {
-    return (<div>SettingsPassword</div>);
-  }
+export default function SettingsPassword() {
+  return (<div>SettingsPassword</div>);
 }
-
-function select(/* state */) {
-  return {
-  };
-}
-
-export default connect(select, {
-
-})(SettingsPassword);
+SettingsPassword.propTypes = {};

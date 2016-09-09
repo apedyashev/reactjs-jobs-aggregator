@@ -1,24 +1,9 @@
 // libs
-import React/* , {PropTypes} */ from 'react';
-import {connect} from 'react-redux';
-// actions
+import React from 'react';
 // components
 import ProfileForm from './Form';
 
-class SettingsProfile extends React.Component {
-  static propTypes = {};
-  render() {
-    return (<div>
-      <ProfileForm />
-    </div>);
-  }
+export default function SettingsProfile() {
+  return <ProfileForm />;
 }
-
-function select(/* state */) {
-  return {
-  };
-}
-
-export default connect(select, {
-
-})(SettingsProfile);
+SettingsProfile.propTypes = {};

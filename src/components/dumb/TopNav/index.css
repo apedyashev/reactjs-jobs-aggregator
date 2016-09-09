@@ -5,7 +5,6 @@
     .item {
       float: left;
       text-decoration: none;
-      
     }
     .active {
       border-top: 3px solid red;

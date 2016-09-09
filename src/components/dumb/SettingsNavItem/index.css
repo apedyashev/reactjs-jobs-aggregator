@@ -1,0 +1,12 @@
+.component {
+  .avatar {
+    position: relative;
+    top: 8px;
+  }
+  .iconMenu {
+    float: right;
+    button {
+      display: none !important;
+    }
+  }
+}

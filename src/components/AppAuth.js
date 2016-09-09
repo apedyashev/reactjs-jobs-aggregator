@@ -1,7 +1,7 @@
 /* eslint react/prefer-stateless-function: "off" */
 import React, {Component, PropTypes} from 'react';
 // components
-import TopBar from 'components/dumb/TopBar';
+import TopNav from 'components/dumb/TopNav';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import muiTheme from './MuiTheme';
@@ -22,7 +22,7 @@ export default class AppAuth extends Component {
     return (
       <MuiThemeProvider muiTheme={getMuiTheme(muiTheme)}>
         <div>
-          <TopBar />
+          <TopNav />
           {this.props.children}
         </div>
       </MuiThemeProvider>

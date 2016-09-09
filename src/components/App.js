@@ -5,7 +5,7 @@ import {push} from 'react-router-redux';
 // actions
 import {loadLoggedUser} from 'actions/user';
 // components
-import TopBar from 'components/dumb/TopBar';
+import TopNav from 'components/dumb/TopNav';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import muiTheme from './MuiTheme';
@@ -18,6 +18,7 @@ require('./normalizes-overwrites.css');
 class App extends Component {
   static propTypes = {
     children: PropTypes.element.isRequired,
+    loggedUser: PropTypes.object.isRequired,
     loadLoggedUser: PropTypes.func.isRequired,
     push: PropTypes.func.isRequired,
   };
@@ -37,7 +38,7 @@ class App extends Component {
     return (
       <MuiThemeProvider muiTheme={getMuiTheme(muiTheme)}>
         <div>
-          <TopBar authenticated />
+          <TopNav authenticated user={this.props.loggedUser} />
           {this.props.children}
         </div>
       </MuiThemeProvider>
@@ -48,7 +49,7 @@ class App extends Component {
 function select(state) {
   const loggedUserId = state.auth && state.auth.userId;
   return {
-    loggedUser: state.entities.users[loggedUserId],
+    loggedUser: state.entities.users[loggedUserId] || {},
     requested: state.auth && state.auth.requested,
   };
 }

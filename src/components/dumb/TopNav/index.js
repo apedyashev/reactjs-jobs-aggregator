@@ -3,9 +3,10 @@ import React, {PropTypes} from 'react';
 // components
 import {Link} from 'react-router';
 import MenuItem from 'material-ui/MenuItem';
+import SettingsNavItem from 'components/dumb/SettingsNavItem';
 import styles from './index.css';
 
-export default function TopBar({authenticated}) {
+export default function TopNav({authenticated, user}) {
   let items;
   if (authenticated) {
     items = (
@@ -16,6 +17,7 @@ export default function TopBar({authenticated}) {
         <Link to="/statistics" className={styles.item} activeClassName={styles.active}>
           <MenuItem primaryText="Statistics" />
         </Link>
+        <SettingsNavItem className={styles.item} user={user} />
       </div>
     );
   } else {
@@ -34,6 +36,7 @@ export default function TopBar({authenticated}) {
   return <div className={styles.container}>{items}</div>;
 }
 
-TopBar.propTypes = {
+TopNav.propTypes = {
   authenticated: PropTypes.bool,
+  user: PropTypes.object.isRequired,
 };

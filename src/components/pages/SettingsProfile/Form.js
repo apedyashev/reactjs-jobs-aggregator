@@ -37,7 +37,7 @@ class LoginForm extends React.Component {
           {...lastName}
         />
         <Input
-          floatingLabelText="Last Name"
+          floatingLabelText="Email"
           value={email}
           disabled
         />

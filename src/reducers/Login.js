@@ -8,6 +8,7 @@ const initialState = {
 export default function auth(state = initialState, action) {
   switch (action.type) {
     case loginActionTypes.login.post.FAILURE:
+    case userActionTypes.loggedUser.fetch.FAILURE:
       return {
         ...state,
         requested: true,

@@ -15,6 +15,7 @@ class SettingsNavItem extends React.Component {
   static propTypes = {
     className: PropTypes.string,
     user: PropTypes.object.isRequired,
+    onSignOutClicked: PropTypes.func.isRequired,
   };
 
   state = {isMenuOpen: false};
@@ -48,7 +49,7 @@ class SettingsNavItem extends React.Component {
       >
         <MenuItem primaryText={<Link to="/settings/profile">Edit Profile</Link>} />
         <MenuItem primaryText={<Link to="/settings/password">Change Password</Link>} />
-        <MenuItem primaryText="Sign Out" />
+        <MenuItem style={{display: 'none'}} primaryText="Sign Out" onClick={this.props.onSignOutClicked} />
       </IconMenu>
     </span>);
   }

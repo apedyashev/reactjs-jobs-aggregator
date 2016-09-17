@@ -6,7 +6,7 @@ import MenuItem from 'material-ui/MenuItem';
 import SettingsNavItem from 'components/dumb/SettingsNavItem';
 import styles from './index.css';
 
-export default function TopNav({authenticated, user}) {
+export default function TopNav({authenticated, user, signOut}) {
   let items;
   if (authenticated) {
     items = (
@@ -17,7 +17,7 @@ export default function TopNav({authenticated, user}) {
         <Link to="/statistics" className={styles.item} activeClassName={styles.active}>
           <MenuItem primaryText="Statistics" />
         </Link>
-        <SettingsNavItem className={styles.item} user={user} />
+        <SettingsNavItem className={styles.item} user={user} onSignOutClicked={signOut} />
       </div>
     );
   } else {
@@ -39,4 +39,5 @@ export default function TopNav({authenticated, user}) {
 TopNav.propTypes = {
   authenticated: PropTypes.bool,
   user: PropTypes.object.isRequired,
+  signOut: PropTypes.func.isRequired,
 };

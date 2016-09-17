@@ -43,7 +43,7 @@ export default function callApi(endpoint, schema, customOptions = {}) {
       }
 
       const camelizedJson = camelizeKeys(json);
-      let resultJson = {};
+      let resultJson = null;
       if (camelizedJson) {
         resultJson = schema ? {...normalize(camelizedJson, schema)} : camelizedJson;
       }

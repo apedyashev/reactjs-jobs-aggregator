@@ -2,8 +2,10 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {push} from 'react-router-redux';
+import _ from 'lodash';
 // actions
 import {loadLoggedUser} from 'actions/user';
+import {submitSignOut} from 'actions/login';
 // components
 import TopNav from 'components/dumb/TopNav';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -22,6 +24,7 @@ class App extends Component {
     loggedUser: PropTypes.object.isRequired,
     loadLoggedUser: PropTypes.func.isRequired,
     push: PropTypes.func.isRequired,
+    submitSignOut: PropTypes.func.isRequired,
   };
 
   componentWillMount() {
@@ -30,7 +33,7 @@ class App extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.requested && !nextProps.loggedUser) {
+    if (nextProps.requested && _.isEmpty(nextProps.loggedUser)) {
       this.props.push('/login');
     }
   }
@@ -38,9 +41,11 @@ class App extends Component {
   render() {
     return (
       <MuiThemeProvider muiTheme={getMuiTheme(muiTheme)}>
-        <div className={styles.container}>
-          <TopNav authenticated user={this.props.loggedUser} />
-          {this.props.children}
+        <div>
+          <TopNav authenticated user={this.props.loggedUser} signOut={this.props.submitSignOut} />
+          <div className={styles.container}>
+            {this.props.children}
+          </div>
         </div>
       </MuiThemeProvider>
     );
@@ -57,5 +62,6 @@ function select(state) {
 
 export default connect(select, {
   loadLoggedUser,
+  submitSignOut,
   push,
 })(App);

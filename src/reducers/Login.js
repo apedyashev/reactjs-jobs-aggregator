@@ -14,6 +14,7 @@ export default function auth(state = initialState, action) {
         requested: true,
       };
     case loginActionTypes.login.post.SUCCESS:
+    case loginActionTypes.register.post.SUCCESS:
     case userActionTypes.loggedUser.fetch.SUCCESS:
       return {
         ...state,

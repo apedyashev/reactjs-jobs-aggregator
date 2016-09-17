@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {push} from 'react-router-redux';
 // actions
 // components
+import {Link} from 'react-router';
 import {H3, Button} from 'components/dumb/Base';
 import LoginForm from './Form';
 import styles from './index.css';
@@ -39,8 +40,10 @@ class LoginPage extends React.Component {
           <H3>Login</H3>
           <LoginForm methods={(methods) => { this.loginFormApi = methods; }} />
 
-          <section>
-            <div>Need account?</div>
+          <section className={styles.formFooter}>
+            <div>
+              <Link to="/register">Need account?</Link>
+            </div>
             <div>
               <Button label="Login" onClick={this.submitForm} />
             </div>

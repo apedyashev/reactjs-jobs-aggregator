@@ -44,6 +44,7 @@ class LoginForm extends React.Component {
           hintText="Please, enter your password"
           floatingLabelText="Password"
           errorText={password.error}
+          type="password"
           {...password}
         />
       </form>

@@ -4,8 +4,8 @@ import {Route, IndexRoute, Redirect} from 'react-router';
 import App from 'components/App';
 import AppAuth from 'components/AppAuth';
 import LandingPage from 'components/pages/Landing';
-import LoginPage from 'components/pages/Login';
-import RegisterPage from 'components/pages/Register';
+import Auth from 'components/pages/Auth';
+// import RegisterPage from 'components/pages/Auth/Register';
 import Dashboard from 'components/pages/Dashboard';
 import JobsPage from 'components/pages/Jobs';
 import SubscriptionEditPage from 'components/pages/SubscriptionEdit';
@@ -30,8 +30,8 @@ export default [
     <Route path="404" component={NotFoundView} />
   </Route>,
   <Route path="/" component={AppAuth}>
-    <Route path="login" component={LoginPage} />
-    <Route path="register" component={RegisterPage} />
+    <Route path="login" component={Auth.LoginPage} />
+    <Route path="register" component={Auth.RegisterPage} />
     <Redirect from="*" to="404" />
   </Route>,
 ];

@@ -7,7 +7,7 @@ import _ from 'lodash';
 import {loadLoggedUser} from 'actions/user';
 import {submitSignOut} from 'actions/login';
 // components
-import TopNav from 'components/dumb/TopNav';
+import TopNav from 'components/dumb/TopNav/Authenticated';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import muiTheme from './MuiTheme';
@@ -42,7 +42,7 @@ class App extends Component {
     return (
       <MuiThemeProvider muiTheme={getMuiTheme(muiTheme)}>
         <div>
-          <TopNav authenticated user={this.props.loggedUser} signOut={this.props.submitSignOut} />
+          <TopNav user={this.props.loggedUser} signOut={this.props.submitSignOut} />
           <div className={styles.container}>
             {this.props.children}
           </div>

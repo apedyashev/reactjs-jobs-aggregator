@@ -6,7 +6,7 @@ import _ from 'lodash';
 // actions
 import {loadLoggedUser} from 'actions/user';
 // components
-import TopNav from 'components/dumb/TopNav';
+import TopNav from 'components/dumb/TopNav/NotAuthenticated';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import muiTheme from './MuiTheme';

@@ -14,7 +14,7 @@ export default function Sidebar({subscriptions, removeSubscription, subscription
     removeSubscription: PropTypes.func.isRequired,
   };
 
-  return (<div>
+  return (<div className={styles.component}>
     <IndexLink to="/dashboard/subscription/new" activeClassName={styles.active}>
       <ListItem primaryText="+ Add Subscription" />
     </IndexLink>

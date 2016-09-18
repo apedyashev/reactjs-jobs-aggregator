@@ -1,5 +1,6 @@
 // libs
 import React, {PropTypes} from 'react';
+import styles from './index.css';
 
 export default function header(num) {
   if ((num < 1) || (num > 6)) {
@@ -7,7 +8,7 @@ export default function header(num) {
   }
 
   function H({children}) {
-    return React.createElement(`h${num}`, {children});
+    return React.createElement(`h${num}`, {children, className: styles[`h${num}`]});
   }
 
   H.propTypes = {

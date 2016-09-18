@@ -6,8 +6,9 @@ import _ from 'lodash';
 import {loadJobs} from 'actions/job';
 // components
 import Waypoint from 'react-waypoint';
-import Loader from 'components/dumb/Loader';
+import PageLoader from 'components/dumb/PageLoader';
 import JobsPaginationItem from 'components/dumb/JobList';
+import NoItemsMessage from 'components/dumb/NoItemsMessage';
 
 class JobList extends React.Component {
   static propTypes = {
@@ -33,7 +34,9 @@ class JobList extends React.Component {
       {_.map(pagedJobs, (jobsForPage, id) => {
         return <JobsPaginationItem key={id} jobs={jobsForPage} />;
       })}
-      {areJobsLoading ? (<Loader />) : null}
+      {(!areJobsLoading && !pagedJobs.length) ?
+        <NoItemsMessage text="No jobs found" /> : null}
+      {areJobsLoading ? (<PageLoader />) : null}
       <Waypoint
         key={subscriptionId}
         onEnter={this.handleNextPageWaypointEnter}

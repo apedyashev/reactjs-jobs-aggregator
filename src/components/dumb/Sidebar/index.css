@@ -1,9 +1,15 @@
-.active {
-  > div {
-    border-left: 3px solid red;
+.component {
+  a {
+    text-decoration: none;
+    color: $primary2Color;
+    span {
+      color: $primary2Color !important;
+    }
   }
-}
 
-a {
-  text-decoration: none;
+  .active {
+    > div {
+      border-left: 3px solid $accent1Color;
+    }
+  }
 }

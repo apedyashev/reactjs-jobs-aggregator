@@ -27,7 +27,7 @@ class SubscriptionList extends React.Component {
     const {itemToBeRemovedId} = this.state;
 
     return (<List>
-      {isLoading ? (<Loader />) : null}
+      {isLoading ? (<Loader size={0.5} />) : null}
       {_.map(subscriptions, (subscription) => {
         return (removingId !== subscription.id) ? (<SubscriptionItem
           key={subscription.id}

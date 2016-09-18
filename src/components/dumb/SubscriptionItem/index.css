@@ -31,10 +31,10 @@
         text-align: center;
       }
       .confirmDelete {
-        background-color: #f33;
+        background-color: $primary3Color;
       }
       .cancelDelete {
-        background-color: grey;
+        background-color: $primary2Color;
       }
     }
     :hover .icons {
@@ -59,7 +59,7 @@
     width: 70%;
 
     &.active {
-      border-left: 3px solid red;
+      border-left: 3px solid $accent1Color;
     }
   }
 
@@ -68,5 +68,9 @@
     display: none;
     position: relative;
     top: 14px;
+    color: $accent1Color;
+    a {
+      color: $accent1Color;
+    }
   }
 }

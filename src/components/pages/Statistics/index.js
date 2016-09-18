@@ -6,7 +6,7 @@ import _ from 'lodash';
 import {loadStatisticsPage} from 'actions/statistics';
 // components
 import {H4} from 'components/dumb/Base';
-import Loader from 'components/dumb/Loader';
+import PageLoader from 'components/dumb/PageLoader';
 import StatsList from './StatsList';
 
 class StatisticsPage extends React.Component {
@@ -27,7 +27,7 @@ class StatisticsPage extends React.Component {
   render() {
     const {cities, availabilities, maxJobs, totalJobs, maxAvailabilities, request: {isLoading}} = this.props;
     if (isLoading) {
-      return <Loader />;
+      return <PageLoader />;
     }
 
     return (<div>

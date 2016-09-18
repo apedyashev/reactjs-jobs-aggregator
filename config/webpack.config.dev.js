@@ -55,6 +55,7 @@ module.exports = {
       helpers: PATHS.app + '/helpers',
       sagas:  PATHS.app + '/sagas',
       services:  PATHS.app + '/services',
+      styles:  PATHS.app + '/styles',
     },
   },
   module: {
@@ -87,6 +88,11 @@ module.exports = {
       }),
       require('postcss-nested'),
       require('lost'),
+      require('postcss-simple-vars')({
+        variables: function () {
+          return require(PATHS.app + '/styles/colors.js');
+        }
+    }),
     ];
   },
   devServer: {

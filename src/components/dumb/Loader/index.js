@@ -2,7 +2,7 @@
 import React, {PropTypes} from 'react';
 import CircularProgress from 'material-ui/CircularProgress';
 
-export default function Loader({size = 1.5}) {
+export default function Loader({size = 0.5}) {
   return (
     <div>
       <CircularProgress size={size} style={{display: 'block', margin: 'auto'}} />

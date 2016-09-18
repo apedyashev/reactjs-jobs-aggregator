@@ -20,7 +20,6 @@ test('H::header', (t) => {
     const H = header(i);
     const children = `children${i}`;
     const wrapper = shallow(<H>{children}</H>);
-    const standardHeader = React.createElement(`h${i}`, {children});
-    t.is(wrapper.contains(standardHeader), true, `must render h${i} element with ${children} as children`);
+    t.is(wrapper.type(), `h${i}`, `must render h${i} element with ${children} as children`);
   }
 });

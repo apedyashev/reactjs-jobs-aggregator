@@ -4,6 +4,6 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 export default function Button(props) {
   return (
-    <RaisedButton {...props} primary />
+    <RaisedButton {...props} secondary />
   );
 }
